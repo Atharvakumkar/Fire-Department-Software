@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.tailwindcss.com"></script>
+    <title>Fire Department Sidebar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 86px;
+            background: #dc2626;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .logo svg {
+            width: 30px;
+            height: 30px;
+            fill: #dc2626;
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: white;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 6px;
+            fill: white;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #dc2626;
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+        }
+
+        .content-header {
+            padding-bottom: 20px;
+            border-bottom: 4px solid #dc2626;
+            margin-bottom: 20px;
+        }
+
+        .content-header h2 {
+            margin-bottom: 8px;
+        }
+
+        .sos-button {
+            position: fixed;
+            left: 300px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            background: #dc2626;
+            border: 8px solid white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.5);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sos-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 32px rgba(220, 38, 38, 0.7);
+        }
+
+        .sos-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .sos-icon {
+            width: 80px;
+            height: 80px;
+            fill: white;
+            margin-bottom: 12px;
+        }
+
+        .sos-text {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .sos-info {
+            position: fixed;
+            right: 300px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 300px;
+            z-index: 999;
+        }
+
+        .sos-info h1 {
+            color: #dc2626;
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 8px;
+        }
+
+        .sos-info p {
+            color: #666;
+            font-size: 20px;
+            line-height: 2;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
+            </svg>
+        </div>
+
+        <div class="nav-items">
+            <a href="#" class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+                </svg>
+                <span class="nav-label">Dashboard</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M14 17H7V15H14V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
+                </svg>
+                <span class="nav-label">Applications</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+                </svg>
+                <span class="nav-label">Inspections</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M16.2 16.2L11 13V7H12.5V12.2L17 14.9L16.2 16.2Z"/>
+                </svg>
+                <span class="nav-label">Follow-ups</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
+                </svg>
+                <span class="nav-label">NOCs</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
+                </svg>
+                <span class="nav-label">Reports</span>
+            </a>
+        </div>
+    </div>
+
+    <button class="sos-button" onclick="handleSOS()">
+        <svg class="sos-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z"/>
+        </svg>
+        <span class="sos-text">SOS</span>
+    </button>
+
+    <div class="sos-info">
+        <h1>SOS</h1>
+        <p>Press the emergency button for immediate assistance. Our team will respond to your emergency within minutes.</p>
+    </div>
+
+    <div class="content">
+        <div class="content-header">
+            <h2>Main Content Area</h2>
+            <p>Your dashboard content goes here</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center px-4 py-100">
+    <div class="group bg-golden p-4 rounded-xl shadow hover:scale-105 hover:shadow-2xl transition-all duration-300" style="background-color: #C9A54F;">
+      <i class="flex justify-center fa-solid fa-certificate text-5xl text-white my-7 transition-colors duration-300"></i>
+      <h2 class="text-center font font-raleway font-semibold text-xl md:text-2xl transition-colors duration-300 text-white mb-2">FSSAI Certified</h2>
+      <p class="text-center font-raleway font-semibold text-white mb-2 px-4 transition-colors duration-300">Approved by FSSAI, ensuring safety, hygiene, and quality in every bite you enjoy.</p>
+    </div>
+
+    
+    <script>
+        function handleSOS() {
+            if(confirm('Emergency SOS activated! Are you sure you want to send an emergency alert?')) {
+                alert('Emergency services have been notified!');
+                // Add your emergency handling logic here
+            }
+        }
+    </script>
+</body>
+</html>
