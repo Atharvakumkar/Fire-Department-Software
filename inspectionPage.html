@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>Fire Safety Code Review</title>
+  <style>
+    .toggle-checkbox {
+      appearance: none;
+      width: 50px;
+      height: 26px;
+      background: #e5e7eb;
+      border-radius: 13px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .toggle-checkbox:checked {
+      background: #16a34a;
+    }
+    .toggle-checkbox::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s;
+    }
+    .toggle-checkbox:checked::after {
+      left: 26px;
+    }
+    .checklist-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-[86px] bg-white min-h-screen flex flex-col items-center py-5 border-r-2 border-gray-200">
+      <!-- Logo circle -->
+      <div class="w-[50px] h-[50px] bg-red-700 rounded-full flex items-center justify-center mb-10">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-white">
+          <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
+        </svg>
+      </div>
+
+      <!-- Nav items -->
+      <nav class="flex flex-col gap-2 w-full">
+  
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-white border-l-4 border-white hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Dashboard</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M14 17H7V15H14V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Applications</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Inspections</span>
+        </a>
+
+        <!-- Active item -->
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700"
+        >
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">NOCs</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Tips</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 relative">
+      <div class="absolute inset-x-0 top-0 h-1 bg-red-600 shadow-md"></div>
+
+      <!-- Header -->
+      <div class="pb-5 border-b-4 border-red-600 mb-8 bg-white px-8 pt-8">
+        <h2 class="text-4xl font-bold mb-2 text-red-600">Fire Safety Code Review</h2>
+        <p class="text-gray-600">Comprehensive compliance assessment and documentation</p>
+      </div>
+
+      <!-- Page Content -->
+      <div class="px-8 pb-8">
+
+        <!-- Form -->
+        <form id="safetyReviewForm" class="space-y-8">
+
+          <!-- Section 1: Building Information -->
+          <div class="bg-white rounded-lg border-l-4 border-red-600 shadow-md p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-building text-2xl text-red-600"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-800">Building Information</h3>
+                <p class="text-gray-600 text-sm">Basic details about the building under review</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Building Name *</label>
+                <input type="text" id="buildingName" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter building name">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Building Type *</label>
+                <select id="buildingType" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+                  <option value="">Select type</option>
+                  <option value="residential">Residential</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="industrial">Industrial</option>
+                  <option value="mixed">Mixed-Use</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-gray-700 font-semibold mb-2">Address *</label>
+                <textarea id="address" required rows="2" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter complete address"></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Number of Floors *</label>
+                <input type="number" id="floors" required min="1" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="e.g., 5">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Occupancy Load *</label>
+                <input type="number" id="occupancyLoad" required min="1" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Number of persons">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Year of Construction *</label>
+                <input type="number" id="yearConstruction" required min="1900" max="2099" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="e.g., 2020">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Owner/Applicant Name *</label>
+                <input type="text" id="ownerName" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter name">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Contact Number *</label>
+                <input type="tel" id="contactNumber" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter phone number">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Fire Safety Infrastructure Checklist -->
+          <div class="bg-white rounded-lg border-l-4 border-red-600 shadow-md p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-fire-extinguisher text-2xl text-red-600"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-800">Fire Safety Infrastructure</h3>
+                <p class="text-gray-600 text-sm">Check availability and functionality of fire safety systems</p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Fire Protection Systems -->
+              <div>
+                <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-shield-alt text-red-600"></i> Fire Protection Systems</h4>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Fire extinguishers installed</span>
+                    <input type="checkbox" class="toggle-checkbox" id="fireExtinguishers">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Hydrants available</span>
+                    <input type="checkbox" class="toggle-checkbox" id="hydrants">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Smoke detectors functional</span>
+                    <input type="checkbox" class="toggle-checkbox" id="smokeDetectors">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Sprinkler system installed</span>
+                    <input type="checkbox" class="toggle-checkbox" id="sprinklers">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Fire alarm system operational</span>
+                    <input type="checkbox" class="toggle-checkbox" id="fireAlarm">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Emergency exits marked</span>
+                    <input type="checkbox" class="toggle-checkbox" id="emergencyExits">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Fire pump working</span>
+                    <input type="checkbox" class="toggle-checkbox" id="firePump">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Electrical Safety -->
+              <div>
+                <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-bolt text-yellow-500"></i> Electrical Safety</h4>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                  <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Wiring Condition</label>
+                    <select id="wiringCondition" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+                      <option value="">Select condition</option>
+                      <option value="good">Good</option>
+                      <option value="average">Average</option>
+                      <option value="poor">Poor</option>
+                    </select>
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Earthing provided</span>
+                    <input type="checkbox" class="toggle-checkbox" id="earthing">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Electrical panels accessible</span>
+                    <input type="checkbox" class="toggle-checkbox" id="panelsAccessible">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Structural Safety -->
+              <div>
+                <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-sitemap text-green-600"></i> Structural Safety</h4>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Escape routes clear</span>
+                    <input type="checkbox" class="toggle-checkbox" id="escapeRoutes">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Fire doors installed</span>
+                    <input type="checkbox" class="toggle-checkbox" id="fireDoors">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Staircase width adequate</span>
+                    <input type="checkbox" class="toggle-checkbox" id="staircaseWidth">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Housekeeping & Storage -->
+              <div>
+                <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-broom text-purple-600"></i> Housekeeping & Storage</h4>
+                <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                  <div class="checklist-item">
+                    <span class="text-gray-700">No hazardous storage</span>
+                    <input type="checkbox" class="toggle-checkbox" id="hazardousStorage">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Corridors obstruction-free</span>
+                    <input type="checkbox" class="toggle-checkbox" id="corridors">
+                  </div>
+                  <div class="checklist-item">
+                    <span class="text-gray-700">Waste disposal safe</span>
+                    <input type="checkbox" class="toggle-checkbox" id="wasteDisposal">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Document Upload -->
+          <div class="bg-white rounded-lg border-l-4 border-red-600 shadow-md p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-upload text-2xl text-red-600"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-800">Document Upload</h3>
+                <p class="text-gray-600 text-sm">Upload supporting documentation and compliance records</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition cursor-pointer">
+                <i class="fas fa-file-pdf text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-3 font-semibold">Building Plan</p>
+                <input type="file" id="buildingPlan" accept=".pdf,.jpg,.png" class="hidden" onchange="updateFileName(this, 'buildingPlanName')">
+                <button type="button" onclick="document.getElementById('buildingPlan').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Choose File</button>
+                <p id="buildingPlanName" class="text-xs text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition cursor-pointer">
+                <i class="fas fa-layer-group text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-3 font-semibold">Fire Safety Equipment Layout</p>
+                <input type="file" id="equipmentLayout" accept=".pdf,.jpg,.png" class="hidden" onchange="updateFileName(this, 'equipmentLayoutName')">
+                <button type="button" onclick="document.getElementById('equipmentLayout').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Choose File</button>
+                <p id="equipmentLayoutName" class="text-xs text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition cursor-pointer">
+                <i class="fas fa-plug text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-3 font-semibold">Electrical Layout Report</p>
+                <input type="file" id="electricalLayout" accept=".pdf,.jpg,.png" class="hidden" onchange="updateFileName(this, 'electricalLayoutName')">
+                <button type="button" onclick="document.getElementById('electricalLayout').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Choose File</button>
+                <p id="electricalLayoutName" class="text-xs text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition cursor-pointer">
+                <i class="fas fa-history text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-3 font-semibold">Previous Fire Audit</p>
+                <input type="file" id="previousAudit" accept=".pdf,.jpg,.png" class="hidden" onchange="updateFileName(this, 'previousAuditName')">
+                <button type="button" onclick="document.getElementById('previousAudit').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Choose File</button>
+                <p id="previousAuditName" class="text-xs text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition cursor-pointer md:col-span-2">
+                <i class="fas fa-paperclip text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-3 font-semibold">Additional Supporting Documents</p>
+                <input type="file" id="additionalDocs" accept=".pdf,.jpg,.png" class="hidden" onchange="updateFileName(this, 'additionalDocsName')">
+                <button type="button" onclick="document.getElementById('additionalDocs').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Choose File</button>
+                <p id="additionalDocsName" class="text-xs text-gray-500 mt-2"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Submit -->
+          <div class="bg-white rounded-lg border-l-4 border-red-600 shadow-md p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-paper-plane text-2xl text-red-600"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-800">Submit Review</h3>
+                <p class="text-gray-600 text-sm">Submit safety review for official processing</p>
+              </div>
+            </div>
+
+            <div class="flex justify-center">
+              <button type="submit" class="px-8 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition flex items-center justify-center gap-2 text-lg">
+                <i class="fas fa-check"></i> Submit
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // API Configuration
+    const API_URL = 'http://localhost:5000/api/safety-reviews';
+
+    function updateFileName(input, displayId) {
+      if (input.files && input.files[0]) {
+        document.getElementById(displayId).textContent = '✓ ' + input.files[0].name;
+      }
+    }
+
+    document.getElementById('safetyReviewForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Create FormData object
+      const formData = new FormData();
+
+      // Add building information
+      formData.append('buildingName', document.getElementById('buildingName').value);
+      formData.append('buildingType', document.getElementById('buildingType').value);
+      formData.append('address', document.getElementById('address').value);
+      formData.append('floors', document.getElementById('floors').value);
+      formData.append('occupancyLoad', document.getElementById('occupancyLoad').value);
+      formData.append('yearConstruction', document.getElementById('yearConstruction').value);
+      formData.append('ownerName', document.getElementById('ownerName').value);
+      formData.append('contactNumber', document.getElementById('contactNumber').value);
+
+      // Add fire protection systems
+      formData.append('fireExtinguishers', document.getElementById('fireExtinguishers').checked);
+      formData.append('hydrants', document.getElementById('hydrants').checked);
+      formData.append('smokeDetectors', document.getElementById('smokeDetectors').checked);
+      formData.append('sprinklers', document.getElementById('sprinklers').checked);
+      formData.append('fireAlarm', document.getElementById('fireAlarm').checked);
+      formData.append('emergencyExits', document.getElementById('emergencyExits').checked);
+      formData.append('firePump', document.getElementById('firePump').checked);
+
+      // Add electrical safety
+      formData.append('wiringCondition', document.getElementById('wiringCondition').value);
+      formData.append('earthing', document.getElementById('earthing').checked);
+      formData.append('panelsAccessible', document.getElementById('panelsAccessible').checked);
+
+      // Add structural safety
+      formData.append('escapeRoutes', document.getElementById('escapeRoutes').checked);
+      formData.append('fireDoors', document.getElementById('fireDoors').checked);
+      formData.append('staircaseWidth', document.getElementById('staircaseWidth').checked);
+
+      // Add housekeeping & storage
+      formData.append('hazardousStorage', document.getElementById('hazardousStorage').checked);
+      formData.append('corridors', document.getElementById('corridors').checked);
+      formData.append('wasteDisposal', document.getElementById('wasteDisposal').checked);
+
+      // Add file uploads
+      const buildingPlanFile = document.getElementById('buildingPlan').files[0];
+      const equipmentLayoutFile = document.getElementById('equipmentLayout').files[0];
+      const electricalLayoutFile = document.getElementById('electricalLayout').files[0];
+      const previousAuditFile = document.getElementById('previousAudit').files[0];
+      const additionalDocsFile = document.getElementById('additionalDocs').files[0];
+
+      if (buildingPlanFile) formData.append('buildingPlan', buildingPlanFile);
+      if (equipmentLayoutFile) formData.append('equipmentLayout', equipmentLayoutFile);
+      if (electricalLayoutFile) formData.append('electricalLayout', electricalLayoutFile);
+      if (previousAuditFile) formData.append('previousAudit', previousAuditFile);
+      if (additionalDocsFile) formData.append('additionalDocs', additionalDocsFile);
+
+      try {
+        // Show loading state
+        const submitBtn = document.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+        // Send to backend
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert(`✓ Safety Review Submitted Successfully!\n\nReview ID: ${result.data.reviewId}\n\nYou can track your review using this ID.`);
+          document.getElementById('safetyReviewForm').reset();
+          
+          // Clear all file names
+          document.getElementById('buildingPlanName').textContent = '';
+          document.getElementById('equipmentLayoutName').textContent = '';
+          document.getElementById('electricalLayoutName').textContent = '';
+          document.getElementById('previousAuditName').textContent = '';
+          document.getElementById('additionalDocsName').textContent = '';
+        } else {
+          alert(`✗ Error: ${result.message}\n\nPlease try again.`);
+        }
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      } catch (error) {
+        console.error('Error:', error);
+        alert(`✗ Error submitting form: ${error.message}\n\nMake sure the backend server is running on http://localhost:5000`);
+        
+        // Reset button
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Submit';
+      }
+    });
+  </script>
+</body>
+</html>
