@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>Fire Safety Tips</title>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-[86px] bg-red-600 min-h-screen flex flex-col items-center py-5">
+      <div class="w-[50px] h-[50px] bg-white rounded-full flex items-center justify-center mb-10">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-red-600">
+          <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
+        </svg>
+      </div>
+
+      <nav class="flex flex-col gap-2 w-full">
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-black/20 border-l-4 border-white">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">Dashboard</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-black/10">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M14 17H7V15H14V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">Applications</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-black/10">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">Inspections</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-black/10">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M16.2 16.2L11 13V7H13V12.2L17 14.9L16.2 16.2Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">Follow-ups</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-black/10">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">NOCs</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-black/10">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">Reports</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1 relative p-5 overflow-y-auto">
+      <div class="absolute inset-x-0 top-0 h-1 bg-red-600 shadow-md"></div>
+
+      <!-- Header -->
+      <div class="pb-5 border-b-4 border-red-600 mb-8">
+        <h2 class="text-[30px] font-bold mb-2 text-red-600">Fire Safety Tips & Guidelines</h2>
+        <p class="text-gray-600">Essential information to keep you and your family safe</p>
+      </div>
+
+      <!-- Tips Grid -->
+      <div id="tipsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        
+        <!-- Home Safety Tips -->
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(1)">
+          <div class="bg-gradient-to-r from-red-500 to-orange-500 p-6 text-white">
+            <i class="fas fa-home text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Smoke Detectors</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Install and maintain smoke alarms on every level of your home, inside bedrooms, and outside sleeping areas.</p>
+            <div class="flex items-center text-red-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(2)">
+          <div class="bg-gradient-to-r from-orange-500 to-yellow-500 p-6 text-white">
+            <i class="fas fa-route text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Escape Plan</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Create and practice a home fire escape plan with two ways out of every room and a meeting point outside.</p>
+            <div class="flex items-center text-orange-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(3)">
+          <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 text-white">
+            <i class="fas fa-burn text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Kitchen Safety</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Never leave cooking unattended. Keep flammable items away from the stove and have a fire extinguisher nearby.</p>
+            <div class="flex items-center text-blue-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(4)">
+          <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-white">
+            <i class="fas fa-fire-extinguisher text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Fire Extinguishers</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Keep fire extinguishers in key locations and know how to use them. Remember: Pull, Aim, Squeeze, Sweep (PASS).</p>
+            <div class="flex items-center text-purple-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(5)">
+          <div class="bg-gradient-to-r from-green-500 to-teal-500 p-6 text-white">
+            <i class="fas fa-plug text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Electrical Safety</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Avoid overloading outlets, replace damaged cords, and never run cords under rugs or furniture.</p>
+            <div class="flex items-center text-green-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(6)">
+          <div class="bg-gradient-to-r from-yellow-500 to-orange-500 p-6 text-white">
+            <i class="fas fa-fire text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Candles & Open Flames</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Keep candles at least 12 inches from flammable items. Never leave them burning unattended or while sleeping.</p>
+            <div class="flex items-center text-yellow-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workplace Tips -->
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(7)">
+          <div class="bg-gradient-to-r from-indigo-500 to-blue-500 p-6 text-white">
+            <i class="fas fa-building text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Exit Routes</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Know all exit routes from your workplace. Keep exits clear and never block fire doors or emergency equipment.</p>
+            <div class="flex items-center text-indigo-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(8)">
+          <div class="bg-gradient-to-r from-red-500 to-pink-500 p-6 text-white">
+            <i class="fas fa-users text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Fire Drills</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Participate in all fire drills. Take them seriously and use them as practice for a real emergency.</p>
+            <div class="flex items-center text-red-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(9)">
+          <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-6 text-white">
+            <i class="fas fa-exclamation-circle text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Report Hazards</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Report fire hazards immediately to management. This includes blocked exits, damaged equipment, or unsafe practices.</p>
+            <div class="flex items-center text-cyan-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Response -->
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(10)">
+          <div class="bg-gradient-to-r from-red-600 to-orange-600 p-6 text-white">
+            <i class="fas fa-running text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Get Out & Stay Out</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">If there's a fire, get out immediately. Never go back inside a burning building for any reason.</p>
+            <div class="flex items-center text-red-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(11)">
+          <div class="bg-gradient-to-r from-gray-600 to-gray-800 p-6 text-white">
+            <i class="fas fa-cloud text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Crawl Low Under Smoke</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Smoke rises, so stay low to the ground where the air is clearer. Crawl on your hands and knees to escape.</p>
+            <div class="flex items-center text-gray-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(12)">
+          <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white">
+            <i class="fas fa-door-closed text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Check Doors First</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Before opening a door, feel it with the back of your hand. If it's hot, use another exit route.</p>
+            <div class="flex items-center text-orange-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Equipment -->
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(13)">
+          <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-6 text-white">
+            <i class="fas fa-bell text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Test Smoke Alarms</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Test your smoke alarms monthly and replace batteries at least once a year. Replace the entire unit every 10 years.</p>
+            <div class="flex items-center text-green-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(14)">
+          <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+            <i class="fas fa-water text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Fire Sprinklers</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Fire sprinklers can control or extinguish a fire in less time than it takes for firefighters to arrive.</p>
+            <div class="flex items-center text-blue-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kids Safety -->
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(15)">
+          <div class="bg-gradient-to-r from-pink-500 to-rose-500 p-6 text-white">
+            <i class="fas fa-child text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Teach Kids About Fire</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Teach children that fire is a tool, not a toy. Keep matches and lighters out of reach and sight.</p>
+            <div class="flex items-center text-pink-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer" onclick="openTip(16)">
+          <div class="bg-gradient-to-r from-purple-500 to-indigo-500 p-6 text-white">
+            <i class="fas fa-hands-helping text-4xl mb-3"></i>
+            <h3 class="text-xl font-bold">Stop, Drop & Roll</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Teach children to stop, drop, and roll if their clothes catch fire. Practice this with them regularly.</p>
+            <div class="flex items-center text-purple-600 font-semibold">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for detailed tips -->
+  <div id="tipModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition">
+        <i class="fas fa-times text-gray-700 text-xl"></i>
+      </button>
+      <div id="modalHeader" class="p-6 text-white"></div>
+      <div class="p-6">
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tipsData = {
+      1: {
+        title: "Smoke Detectors",
+        icon: "fa-home",
+        gradient: "from-red-500 to-orange-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Smoke Detector Guidelines</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Installation:</strong> Install smoke alarms on every level of your home, including the basement. Place them inside each bedroom and outside sleeping areas.</p>
+            <p><strong>Testing:</strong> Test smoke alarms monthly by pressing the test button. Replace batteries at least once a year, or immediately when the low-battery warning chirps.</p>
+            <p><strong>Replacement:</strong> Replace the entire smoke alarm unit every 10 years, or according to manufacturer's instructions.</p>
+            <p><strong>Types:</strong> Consider both ionization and photoelectric smoke alarms, or dual-sensor alarms for comprehensive protection.</p>
+            <p><strong>Interconnection:</strong> For maximum safety, interconnect all smoke alarms so when one sounds, they all sound.</p>
+          </div>
+        `
+      },
+      2: {
+        title: "Escape Plan",
+        icon: "fa-route",
+        gradient: "from-orange-500 to-yellow-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Creating Your Fire Escape Plan</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Two Ways Out:</strong> Identify two ways out of every room, including windows and doors. Make sure all exits are clear and easy to open.</p>
+            <p><strong>Meeting Point:</strong> Choose a safe meeting place outside your home, such as a tree or mailbox, where everyone will gather.</p>
+            <p><strong>Practice:</strong> Practice your escape plan at least twice a year. Make it fun for children by turning it into a drill.</p>
+            <p><strong>Special Considerations:</strong> Plan for everyone in your household, including elderly family members, people with disabilities, and pets.</p>
+            <p><strong>Never Go Back:</strong> Teach everyone that once they're out, they must NEVER go back inside for any reason.</p>
+          </div>
+        `
+      },
+      3: {
+        title: "Kitchen Safety",
+        icon: "fa-burn",
+        gradient: "from-blue-500 to-cyan-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Kitchen Fire Prevention</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Stay Alert:</strong> Never leave cooking unattended. If you must leave the kitchen, turn off the stove.</p>
+            <p><strong>Clear Zone:</strong> Keep anything that can catch fire at least 3 feet away from the stove, including oven mitts, wooden utensils, food packaging, and towels.</p>
+            <p><strong>Clothing Safety:</strong> Avoid wearing loose clothing or dangling sleeves while cooking. Roll up sleeves and tie back long hair.</p>
+            <p><strong>Grease Fires:</strong> Never use water on a grease fire. Smother it with a lid or use a fire extinguisher. If the fire is out of control, get out and call 911.</p>
+            <p><strong>Fire Extinguisher:</strong> Keep a fire extinguisher in the kitchen and know how to use it properly.</p>
+          </div>
+        `
+      },
+      4: {
+        title: "Fire Extinguishers",
+        icon: "fa-fire-extinguisher",
+        gradient: "from-purple-500 to-pink-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Fire Extinguisher Safety</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>PASS Technique:</strong></p>
+            <ul class="list-disc ml-6 space-y-2">
+              <li><strong>P</strong>ull the pin</li>
+              <li><strong>A</strong>im low at the base of the fire</li>
+              <li><strong>S</strong>queeze the lever slowly</li>
+              <li><strong>S</strong>weep from side to side</li>
+            </ul>
+            <p><strong>Location:</strong> Place extinguishers in key locations: kitchen, garage, workshop. Mount them in easy-to-access locations.</p>
+            <p><strong>Types:</strong> Use Class ABC extinguishers for home use. They work on ordinary combustibles, flammable liquids, and electrical fires.</p>
+            <p><strong>Maintenance:</strong> Check pressure gauge monthly. Have extinguishers professionally serviced annually.</p>
+            <p><strong>When to Use:</strong> Only fight small, contained fires. If the fire spreads, evacuate immediately and call 911.</p>
+          </div>
+        `
+      },
+      5: {
+        title: "Electrical Safety",
+        icon: "fa-plug",
+        gradient: "from-green-500 to-teal-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Electrical Fire Prevention</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Outlet Safety:</strong> Don't overload outlets or extension cords. Use power strips with built-in circuit breakers.</p>
+            <p><strong>Cord Inspection:</strong> Regularly inspect electrical cords for damage. Replace frayed, cracked, or damaged cords immediately.</p>
+            <p><strong>Proper Use:</strong> Never run cords under rugs, furniture, or through doorways where they can be damaged.</p>
+            <p><strong>Heat Sources:</strong> Unplug appliances when not in use, especially heat-producing devices like irons, hair dryers, and space heaters.</p>
+            <p><strong>Professional Help:</strong> If outlets are warm, if you see sparks, or smell burning, have a licensed electrician inspect your system immediately.</p>
+          </div>
+        `
+      },
+      6: {
+        title: "Candles & Open Flames",
+        icon: "fa-fire",
+        gradient: "from-yellow-500 to-orange-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Safe Candle Use</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Safe Distance:</strong> Keep candles at least 12 inches away from anything that can burn, including curtains, bedding, decorations, and furniture.</p>
+            <p><strong>Sturdy Holders:</strong> Use sturdy, heat-resistant candle holders that won't tip over and are large enough to collect dripping wax.</p>
+            <p><strong>Never Leave Unattended:</strong> Blow out candles before leaving a room or going to sleep. Never leave a burning candle unattended.</p>
+            <p><strong>Keep Away from Children:</strong> Keep candles and matches out of reach of children and pets.</p>
+            <p><strong>Alternatives:</strong> Consider using battery-operated flameless candles for a safer alternative, especially in bedrooms.</p>
+          </div>
+        `
+      },
+      7: {
+        title: "Exit Routes",
+        icon: "fa-building",
+        gradient: "from-indigo-500 to-blue-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Workplace Exit Safety</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Know Your Exits:</strong> Familiarize yourself with all exit routes from your work area. Know at least two ways out.</p>
+            <p><strong>Keep Exits Clear:</strong> Never block exits, hallways, or stairways with equipment, supplies, or furniture.</p>
+            <p><strong>Emergency Lighting:</strong> Ensure exit signs are illuminated and emergency lighting is functional.</p>
+            <p><strong>Fire Doors:</strong> Never prop open fire doors. They're designed to contain smoke and fire.</p>
+            <p><strong>Assembly Point:</strong> Know your workplace's designated assembly point outside the building.</p>
+          </div>
+        `
+      },
+      8: {
+        title: "Fire Drills",
+        icon: "fa-users",
+        gradient: "from-red-500 to-pink-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Fire Drill Best Practices</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Take It Seriously:</strong> Treat every drill as if it's a real emergency. This helps build muscle memory.</p>
+            <p><strong>Follow Procedures:</strong> Follow all evacuation procedures, including checking doors before opening and staying low if there's smoke.</p>
+            <p><strong>Don't Use Elevators:</strong> Always use stairs during evacuations. Elevators may malfunction or trap you during a fire.</p>
+            <p><strong>Account for Everyone:</strong> Once outside, report to your designated area and help account for all personnel.</p>
+            <p><strong>Provide Feedback:</strong> Share observations about blocked exits, confusing procedures, or safety concerns with management.</p>
+          </div>
+        `
+      },
+      9: {
+        title: "Report Hazards",
+        icon: "fa-exclamation-circle",
+        gradient: "from-cyan-500 to-blue-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Identifying and Reporting Fire Hazards</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Common Hazards:</strong> Blocked exits, damaged electrical equipment, overloaded circuits, improperly stored flammables, and non-functional fire safety equipment.</p>
+            <p><strong>Report Immediately:</strong> Don't wait - report hazards to your supervisor or safety officer as soon as you notice them.</p>
+            <p><strong>Document:</strong> Take photos if safe to do so and document the location and nature of the hazard.</p>
+            <p><strong>Follow Up:</strong> If a hazard isn't addressed promptly, escalate your concern to higher management or your safety committee.</p>
+            <p><strong>No Retaliation:</strong> Remember, reporting safety hazards is your right and responsibility. You should never face retaliation for safety concerns.</p>
+          </div>
+        `
+      },
+      10: {
+        title: "Get Out & Stay Out",
+        icon: "fa-running",
+        gradient: "from-red-600 to-orange-600",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Emergency Evacuation Rules</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Leave Immediately:</strong> When the alarm sounds or you detect fire, leave immediately. Don't waste time gathering belongings.</p>
+            <p><strong>Never Go Back:</strong> Once you're out, stay out. Never go back inside a burning building for any reason - not for people, pets, or possessions.</p>
+            <p><strong>Close Doors:</strong> Close doors behind you as you leave to slow the spread of fire and smoke.</p>
+            <p><strong>Call for Help:</strong> Once safely outside, call 911 from a safe location. Give your exact address and details about the fire.</p>
+            <p><strong>Wait for Professionals:</strong> Let firefighters handle rescue operations. They have the training and equipment to do so safely.</p>
+          </div>
+        `
+      },
+      11: {
+        title: "Crawl Low Under Smoke",
+        icon: "fa-cloud",
+        gradient: "from-gray-600 to-gray-800",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Smoke Safety During Evacuation</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Stay Low:</strong> Smoke and toxic gases rise, so the cleanest air is near the floor. Get down on your hands and knees and crawl to the nearest safe exit.</p>
+            <p><strong>Cover Your Nose:</strong> If possible, cover your nose and mouth with a damp cloth to help filter smoke.</p>
+            <p><strong>Feel Doors:</strong> Before opening any door, feel it with the back of your hand. If it's hot, use another exit route.</p>
+            <p><strong>Stay Oriented:</strong> Keep one hand on the wall to help you navigate through smoke and darkness.</p>
+            <p><strong>If Trapped:</strong> If you can't escape, close the door, seal cracks with towels or clothing, and signal for help from a window.</p>
+          </div>
+        `
+      },
+      12: {
+        title: "Check Doors First",
+        icon: "fa-door-closed",
+        gradient: "from-orange-500 to-red-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Door Safety During Fire</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Feel Before Opening:</strong> Before opening any door during a fire, feel the door, doorknob, and crack between the door and frame with the back of your hand.</p>
+            <p><strong>If It's Hot:</strong> If the door is hot, don't open it. Fire is on the other side. Use your alternate escape route.</p>
+            <p><strong>If It's Cool:</strong> If the door is cool, open it slowly. Be ready to slam it shut if there's smoke or fire on the other side.</p>
+            <p><strong>Brace Yourself:</strong> When opening a door, crouch low and brace your shoulder against it to control the opening in case of pressure differences.</p>
+            <p><strong>Close Behind You:</strong> As you escape, close doors behind you to slow the spread of fire and smoke.</p>
+          </div>
+        `
+      },
+      13: {
+        title: "Test Smoke Alarms",
+        icon: "fa-bell",
+        gradient: "from-green-500 to-emerald-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Smoke Alarm Maintenance</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Monthly Testing:</strong> Test all smoke alarms monthly by pressing and holding the test button until the alarm sounds.</p>
+            <p><strong>Battery Replacement:</strong> Replace batteries at least once a year, or immediately when the low-battery warning sounds. Consider replacing batteries when you change your clocks.</p>
+            <p><strong>Clean Regularly:</strong> Vacuum or dust smoke alarms monthly to prevent dust buildup that can affect performance.</p>
+            <p><strong>Replace Units:</strong> Replace the entire smoke alarm every 10 years, or according to the manufacturer's instructions.</p>
+            <p><strong>Don't Disable:</strong> Never remove batteries from smoke alarms or disable them because of false alarms. Instead, move the alarm or switch to a photoelectric model.</p>
+          </div>
+        `
+      },
+      14: {
+        title: "Fire Sprinklers",
+        icon: "fa-water",
+        gradient: "from-blue-600 to-indigo-600",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Fire Sprinkler Systems</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Fast Response:</strong> Sprinklers activate automatically when heat reaches a specific temperature, often controlling or extinguishing fires before firefighters arrive.</p>
+            <p><strong>Targeted Activation:</strong> Only sprinklers directly over the fire activate - they don't all go off at once like in movies.</p>
+            <p><strong>Limited Water Damage:</strong> Sprinklers use much less water than fire hoses, resulting in less water damage overall.</p>
+            <p><strong>Keep Clear:</strong> Don't hang items from sprinkler heads or pipes. Maintain at least 18 inches of clearance below sprinklers for proper operation.</p>
+            <p><strong>Home Installation:</strong> Consider installing home fire sprinklers, especially in new construction. They significantly increase survival rates.</p>
+          </div>
+        `
+      },
+      15: {
+        title: "Teach Kids About Fire",
+        icon: "fa-child",
+        gradient: "from-pink-500 to-rose-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Fire Safety Education for Children</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>Fire is a Tool:</strong> Teach children that fire is a tool for adults to use, not a toy. Explain both its usefulness and dangers.</p>
+            <p><strong>Keep Out of Reach:</strong> Store matches, lighters, and other fire-starting materials up high, out of children's reach and sight.</p>
+            <p><strong>Tell an Adult:</strong> Instruct children to tell an adult immediately if they find matches or lighters.</p>
+            <p><strong>Firefighter Friends:</strong> Teach children that firefighters are helpers. Show them firefighter gear so they won't be scared during a rescue.</p>
+            <p><strong>Practice Escape:</strong> Practice your home fire escape plan with children. Make sure they know how to escape from their bedrooms and where to meet outside.</p>
+          </div>
+        `
+      },
+      16: {
+        title: "Stop, Drop & Roll",
+        icon: "fa-hands-helping",
+        gradient: "from-purple-500 to-indigo-500",
+        content: `
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Stop, Drop & Roll Technique</h3>
+          <div class="space-y-4 text-gray-700">
+            <p><strong>STOP:</strong> If your clothes catch fire, don't run! Running fans the flames and makes them worse. Stop immediately where you are.</p>
+            <p><strong>DROP:</strong> Drop to the ground carefully. Cover your face with your hands to protect it from flames.</p>
+            <p><strong>ROLL:</strong> Roll over and over, or back and forth, until the flames are extinguished. Rolling smothers the fire by cutting off its oxygen supply.</p>
+            <p><strong>Practice Regularly:</strong> Practice this technique with children regularly so it becomes second nature. Make it fun but emphasize its importance.</p>
+            <p><strong>Cool the Burn:</strong> After the flames are out, cool the burn immediately with cool water for at least 3-5 minutes, then seek medical attention.</p>
+          </div>
+        `
+      }
+    };
+
+    function openTip(tipId) {
+      const tip = tipsData[tipId];
+      const modal = document.getElementById('tipModal');
+      const modalHeader = document.getElementById('modalHeader');
+      const modalContent = document.getElementById('modalContent');
+
+      modalHeader.className = `bg-gradient-to-r ${tip.gradient} p-6 text-white rounded-t-2xl`;
+      modalHeader.innerHTML = `
+        <i class="fas ${tip.icon} text-5xl mb-3"></i>
+        <h2 class="text-3xl font-bold">${tip.title}</h2>
+      `;
+      
+      modalContent.innerHTML = tip.content;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('tipModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('tipModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
