@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>Fire NOC Application</title>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Page grid: sidebar + main content -->
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-[86px] bg-white min-h-screen flex flex-col items-center py-5 border-r-2 border-gray-200">
+      <!-- Logo circle -->
+      <div class="w-[50px] h-[50px] bg-red-700 rounded-full flex items-center justify-center mb-10">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-white">
+          <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
+        </svg>
+      </div>
+
+      <!-- Nav items -->
+      <nav class="flex flex-col gap-2 w-full">
+  
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-white border-l-4 border-white hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Dashboard</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M14 17H7V15H14V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Applications</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Inspections</span>
+        </a>
+
+        <!-- Active item -->
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700"
+        >
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white text-center">NOCs</span>
+        </a>
+
+        <a
+          href="#"
+          class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700 text-center">Tips</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1 relative p-5">
+      <div class="absolute inset-x-0 top-0 h-1 bg-red-600 shadow-md"></div>
+
+      <!-- Header -->
+      <div class="pb-5 border-b-4 border-red-600 mb-8">
+        <h2 class="text-[30px] font-bold mb-2 text-red-600">Fire NOC Application</h2>
+        <p class="text-gray-600">Apply for No Objection Certificate online</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-4 mb-8 border-b-2 border-gray-200">
+        <button onclick="showTab('new')" id="tab-new" class="px-6 py-3 font-semibold text-red-600 border-b-4 border-red-600 transition">
+          New Application
+        </button>
+        <button onclick="showTab('my')" id="tab-my" class="px-6 py-3 font-semibold text-gray-500 hover:text-red-600 transition">
+          My Applications
+        </button>
+      </div>
+
+      <!-- New Application Tab -->
+      <div id="content-new" class="tab-content">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+          <h3 class="text-2xl font-bold text-red-600 mb-6">Application Form</h3>
+          
+          <div class="space-y-6">
+            <!-- Building Type -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">Building Type *</label>
+              <select id="buildingType" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+                <option value="">Select building type</option>
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial</option>
+                <option value="industrial">Industrial</option>
+                <option value="institutional">Institutional</option>
+                <option value="mixed">Mixed Use</option>
+              </select>
+            </div>
+
+            <!-- Property Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Property Name *</label>
+                <input type="text" id="propertyName" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter property name">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Plot/Survey Number *</label>
+                <input type="text" id="plotNumber" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter plot number">
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">Complete Address *</label>
+              <textarea id="address" rows="3" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter complete address"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Built-up Area (sq.ft) *</label>
+                <input type="number" id="builtupArea" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter area">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Number of Floors *</label>
+                <input type="number" id="floors" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter floors">
+              </div>
+            </div>
+
+            <!-- Applicant Details -->
+            <h4 class="text-xl font-bold text-gray-800 mt-8 mb-4">Applicant Details</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
+                <input type="text" id="applicantName" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter full name">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Mobile Number *</label>
+                <input type="tel" id="mobile" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter mobile number">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
+                <input type="email" id="email" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter email">
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">Applicant Type *</label>
+                <select id="applicantType" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+                  <option value="">Select type</option>
+                  <option value="owner">Owner</option>
+                  <option value="architect">Architect</option>
+                  <option value="builder">Builder</option>
+                  <option value="authorized">Authorized Representative</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Document Upload -->
+            <h4 class="text-xl font-bold text-gray-800 mt-8 mb-4">Required Documents</h4>
+            
+            <div class="space-y-4">
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition">
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-2">Building Plan (PDF)</p>
+                <input type="file" id="buildingPlan" accept=".pdf" class="hidden" onchange="handleFileUpload(this, 'buildingPlan')">
+                <button onclick="document.getElementById('buildingPlan').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                  Choose File
+                </button>
+                <p id="buildingPlan-name" class="text-sm text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition">
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-2">Property Documents (PDF)</p>
+                <input type="file" id="propertyDoc" accept=".pdf" class="hidden" onchange="handleFileUpload(this, 'propertyDoc')">
+                <button onclick="document.getElementById('propertyDoc').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                  Choose File
+                </button>
+                <p id="propertyDoc-name" class="text-sm text-gray-500 mt-2"></p>
+              </div>
+
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-red-600 transition">
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                <p class="text-gray-600 mb-2">ID Proof (PDF/JPG)</p>
+                <input type="file" id="idProof" accept=".pdf,.jpg,.jpeg,.png" class="hidden" onchange="handleFileUpload(this, 'idProof')">
+                <button onclick="document.getElementById('idProof').click()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                  Choose File
+                </button>
+                <p id="idProof-name" class="text-sm text-gray-500 mt-2"></p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end gap-4 mt-8">
+              <button onclick="resetForm()" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition">
+                Reset
+              </button>
+              <button onclick="submitApplication()" class="px-8 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">
+                Submit Application
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Applications Tab -->
+      <div id="content-my" class="tab-content hidden">
+        <div class="max-w-6xl mx-auto">
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-red-600 mb-6">My Applications</h3>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="border-b-2 border-gray-200">
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Application No</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Property</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Type</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="applicationsTable">
+                  <!-- Applications will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // API Configuration
+const API_URL = 'http://localhost:5000/api';
+
+// Store applications in memory
+let applications = [];
+let applicationDetails = {};
+
+// Load applications from backend on page load
+window.onload = async function() {
+  await loadApplicationsFromBackend();
+};
+
+// Load applications from backend
+async function loadApplicationsFromBackend() {
+  try {
+    const response = await fetch(`${API_URL}/applications`);
+    const result = await response.json();
+    
+    if (result.success) {
+      applications = result.data.map(app => ({
+        appNo: app.appNo,
+        property: app.propertyName,
+        type: app.buildingType.charAt(0).toUpperCase() + app.buildingType.slice(1),
+        date: new Date(app.submittedDate).toISOString().split('T')[0],
+        status: app.status,
+        statusClass: app.statusClass
+      }));
+      
+      // Store full details
+      result.data.forEach(app => {
+        applicationDetails[app.appNo] = {
+          buildingType: app.buildingType,
+          propertyName: app.propertyName,
+          plotNumber: app.plotNumber,
+          address: app.address,
+          builtupArea: app.builtupArea.toString(),
+          floors: app.floors.toString(),
+          applicantName: app.applicantName,
+          mobile: app.mobile,
+          email: app.email,
+          applicantType: app.applicantType
+        };
+      });
+      
+      loadMyApplications();
+    }
+  } catch (error) {
+    console.error('Error loading applications:', error);
+    alert('Error loading applications from server. Please check if backend is running.');
+  }
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('[id^="tab-"]').forEach(el => {
+    el.classList.remove('text-red-600', 'border-b-4', 'border-red-600');
+    el.classList.add('text-gray-500');
+  });
+  
+  document.getElementById('content-' + tab).classList.remove('hidden');
+  const activeTab = document.getElementById('tab-' + tab);
+  activeTab.classList.remove('text-gray-500');
+  activeTab.classList.add('text-red-600', 'border-b-4', 'border-red-600');
+}
+
+function handleFileUpload(input, fieldName) {
+  if (input.files && input.files[0]) {
+    document.getElementById(fieldName + '-name').textContent = input.files[0].name;
+  }
+}
+
+async function submitApplication() {
+  const buildingType = document.getElementById('buildingType').value;
+  const propertyName = document.getElementById('propertyName').value;
+  const plotNumber = document.getElementById('plotNumber').value;
+  const address = document.getElementById('address').value;
+  const builtupArea = document.getElementById('builtupArea').value;
+  const floors = document.getElementById('floors').value;
+  const applicantName = document.getElementById('applicantName').value;
+  const mobile = document.getElementById('mobile').value;
+  const email = document.getElementById('email').value;
+  const applicantType = document.getElementById('applicantType').value;
+
+  if (!buildingType || !propertyName || !plotNumber || !address || !builtupArea || 
+      !floors || !applicantName || !mobile || !email || !applicantType) {
+    alert('Please fill all required fields marked with *');
+    return;
+  }
+
+  // Create FormData for file upload
+  const formData = new FormData();
+  formData.append('buildingType', buildingType);
+  formData.append('propertyName', propertyName);
+  formData.append('plotNumber', plotNumber);
+  formData.append('address', address);
+  formData.append('builtupArea', builtupArea);
+  formData.append('floors', floors);
+  formData.append('applicantName', applicantName);
+  formData.append('mobile', mobile);
+  formData.append('email', email);
+  formData.append('applicantType', applicantType);
+
+  // Append files if selected
+  const buildingPlanFile = document.getElementById('buildingPlan').files[0];
+  const propertyDocFile = document.getElementById('propertyDoc').files[0];
+  const idProofFile = document.getElementById('idProof').files[0];
+
+  if (buildingPlanFile) formData.append('buildingPlan', buildingPlanFile);
+  if (propertyDocFile) formData.append('propertyDoc', propertyDocFile);
+  if (idProofFile) formData.append('idProof', idProofFile);
+
+  try {
+    // Show loading message
+    const submitBtn = event.target;
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+
+    const response = await fetch(`${API_URL}/applications`, {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert(`Application submitted successfully!\n\nApplication Number: ${result.data.appNo}\n\nYou can track your application using this number.`);
+      resetForm();
+      await loadApplicationsFromBackend();
+      showTab('my'); // Switch to My Applications tab
+    } else {
+      alert('Error submitting application: ' + result.message);
+    }
+
+    // Reset button
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error submitting application. Please make sure the backend server is running.');
+    
+    // Reset button
+    const submitBtn = event.target;
+    submitBtn.textContent = 'Submit Application';
+    submitBtn.disabled = false;
+  }
+}
+
+function resetForm() {
+  document.getElementById('buildingType').value = '';
+  document.getElementById('propertyName').value = '';
+  document.getElementById('plotNumber').value = '';
+  document.getElementById('address').value = '';
+  document.getElementById('builtupArea').value = '';
+  document.getElementById('floors').value = '';
+  document.getElementById('applicantName').value = '';
+  document.getElementById('mobile').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('applicantType').value = '';
+  document.getElementById('buildingPlan').value = '';
+  document.getElementById('propertyDoc').value = '';
+  document.getElementById('idProof').value = '';
+  document.getElementById('buildingPlan-name').textContent = '';
+  document.getElementById('propertyDoc-name').textContent = '';
+  document.getElementById('idProof-name').textContent = '';
+}
+
+function loadMyApplications() {
+  const tbody = document.getElementById('applicationsTable');
+  
+  if (applications.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-gray-500">No applications found</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = applications.map(app => `
+    <tr class="border-b border-gray-200 hover:bg-gray-50">
+      <td class="py-4 px-4 font-semibold text-red-600">${app.appNo}</td>
+      <td class="py-4 px-4">${app.property}</td>
+      <td class="py-4 px-4">${app.type}</td>
+      <td class="py-4 px-4">${app.date}</td>
+      <td class="py-4 px-4">
+        <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass}">
+          ${app.status}
+        </span>
+      </td>
+      <td class="py-4 px-4">
+        <button onclick="viewDetails('${app.appNo}')" class="text-red-600 hover:text-red-700 font-semibold">
+          <i class="fas fa-eye mr-1"></i>View
+        </button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function viewDetails(appNo) {
+  const app = applications.find(a => a.appNo === appNo);
+  const details = applicationDetails[appNo];
+  
+  if (app && details) {
+    // Populate form with details
+    document.getElementById('buildingType').value = details.buildingType;
+    document.getElementById('propertyName').value = details.propertyName;
+    document.getElementById('plotNumber').value = details.plotNumber;
+    document.getElementById('address').value = details.address;
+    document.getElementById('builtupArea').value = details.builtupArea;
+    document.getElementById('floors').value = details.floors;
+    document.getElementById('applicantName').value = details.applicantName;
+    document.getElementById('mobile').value = details.mobile;
+    document.getElementById('email').value = details.email;
+    document.getElementById('applicantType').value = details.applicantType;
+    
+    // Make all fields readonly
+    document.querySelectorAll('#content-new input, #content-new select, #content-new textarea').forEach(field => {
+      field.setAttribute('readonly', true);
+      field.setAttribute('disabled', true);
+      field.classList.add('bg-gray-100', 'cursor-not-allowed');
+    });
+    
+    // Hide upload sections and buttons
+    document.querySelectorAll('#content-new .border-dashed').forEach(el => el.style.display = 'none');
+    document.querySelector('#content-new .flex.justify-end').style.display = 'none';
+    
+    // Add view-only header and back button
+    const formHeader = document.querySelector('#content-new h3');
+    formHeader.innerHTML = `
+      <div class="flex justify-between items-center">
+        <div>
+          <span class="text-2xl font-bold text-red-600">Application Details (View Only)</span>
+          <p class="text-sm text-gray-600 mt-1">Application No: ${appNo} | Status: ${app.status}</p>
+        </div>
+        <button onclick="backToMyApplications()" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">
+          <i class="fas fa-arrow-left mr-2"></i>Back to My Applications
+        </button>
+      </div>
+    `;
+    
+    // Switch to new application tab
+    showTab('new');
+  }
+}
+
+function backToMyApplications() {
+  // Reset form
+  resetForm();
+  
+  // Remove readonly attributes
+  document.querySelectorAll('#content-new input, #content-new select, #content-new textarea').forEach(field => {
+    field.removeAttribute('readonly');
+    field.removeAttribute('disabled');
+    field.classList.remove('bg-gray-100', 'cursor-not-allowed');
+  });
+  
+  // Show upload sections and buttons
+  document.querySelectorAll('#content-new .border-dashed').forEach(el => el.style.display = '');
+  document.querySelector('#content-new .flex.justify-end').style.display = '';
+  
+  // Reset header
+  const formHeader = document.querySelector('#content-new h3');
+  formHeader.innerHTML = 'Application Form';
+  
+  // Go back to My Applications tab
+  showTab('my');
+}
+  </script>
+</body>
+</html>
