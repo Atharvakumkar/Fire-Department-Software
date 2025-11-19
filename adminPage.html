@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" />
+    <title>Fire NOC - Admin Panel</title>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Login Page -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-red-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-fire text-white text-3xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-red-600">Admin Login</h2>
+                <p class="text-gray-600 mt-2">Fire NOC Management System</p>
+            </div>
+
+            <form onsubmit="login(event)" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Username</label>
+                    <input type="text" id="username" required
+                        class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                        placeholder="Enter username">
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                    <input type="password" id="password" required
+                        class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                        placeholder="Enter password">
+                </div>
+
+                <button type="submit"
+                    class="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </button>
+            </form>
+
+            <p class="text-sm text-gray-500 mt-4 text-center">Default: admin / admin123</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden min-h-screen flex">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white min-h-screen border-r-2 border-gray-200">
+            <div class="p-6 border-b-2 border-gray-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center">
+                        <i class="fas fa-fire text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-red-600">Fire NOC</h3>
+                        <p class="text-xs text-gray-600">Admin Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="p-4 space-y-2">
+                <a href="#" onclick="showSection('dashboard')"
+                    class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" onclick="showSection('applications')"
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                </a>
+                <a href="#" onclick="logout()"
+                    class="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+
+            <div class="absolute bottom-4 left-4 right-4 p-4 bg-red-50 rounded-lg">
+                <p class="text-sm font-semibold text-red-600">Logged in as:</p>
+                <p class="text-sm text-gray-600" id="adminUsername">Admin</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="section">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-red-600 mb-2">Dashboard</h2>
+                    <p class="text-gray-600">Overview of all NOC applications</p>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold">Total Applications</p>
+                                <p class="text-3xl font-bold text-blue-600" id="totalCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold">Pending Review</p>
+                                <p class="text-3xl font-bold text-yellow-600" id="submittedCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold">Approved</p>
+                                <p class="text-3xl font-bold text-green-600" id="approvedCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 text-sm font-semibold">Rejected</p>
+                                <p class="text-3xl font-bold text-red-600" id="rejectedCount">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-times-circle text-red-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Recent Applications</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">App No</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Property</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Applicant</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentApplicationsTable">
+                                <tr>
+                                    <td colspan="5" class="text-center py-8 text-gray-500">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div id="applicationsSection" class="section hidden">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-red-600 mb-2">All Applications</h2>
+                    <p class="text-gray-600">Manage and review NOC applications</p>
+                </div>
+
+                <!-- Filters -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Filter by Status</label>
+                            <select id="statusFilter" onchange="filterApplications()"
+                                class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+                                <option value="all">All Applications</option>
+                                <option value="Submitted">Submitted</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Search</label>
+                            <input type="text" id="searchInput" onkeyup="filterApplications()"
+                                class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none"
+                                placeholder="Search by App No, Property, or Name">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="filterApplications()"
+                                class="w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">
+                                <i class="fas fa-search mr-2"></i>Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Table -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">App No</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Property</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Applicant</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Type</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationsTable">
+                                <tr>
+                                    <td colspan="7" class="text-center py-8 text-gray-500">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Application Detail Modal -->
+    <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto m-4">
+            <div class="sticky top-0 bg-red-600 text-white p-6 flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Application Details</h3>
+                <button onclick="closeModal()" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="modalContent" class="p-6">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .nav-item {
+            color: #4B5563;
+        }
+
+        .nav-item:hover {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .nav-item.active {
+            background-color: #DC2626;
+            color: white;
+        }
+    </style>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        let allApplications = [];
+        let currentAdmin = null;
+
+        // Login Function
+        async function login(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/admin/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    currentAdmin = result.data;
+                    document.getElementById('adminUsername').textContent = result.data.username;
+                    document.getElementById('loginPage').classList.add('hidden');
+                    document.getElementById('adminDashboard').classList.remove('hidden');
+                    loadDashboard();
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed. Please make sure the server is running.');
+            }
+        }
+
+        // Logout Function
+        function logout() {
+            currentAdmin = null;
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Load Dashboard
+        async function loadDashboard() {
+            await loadStatistics();
+            await loadRecentApplications();
+            await loadAllApplications();
+        }
+
+        // Load Statistics
+        async function loadStatistics() {
+            try {
+                const response = await fetch(`${API_URL}/admin/stats`);
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('totalCount').textContent = result.data.total;
+                    document.getElementById('submittedCount').textContent = result.data.submitted;
+                    document.getElementById('approvedCount').textContent = result.data.approved;
+                    document.getElementById('rejectedCount').textContent = result.data.rejected;
+                }
+            } catch (error) {
+                console.error('Error loading statistics:', error);
+            }
+        }
+
+        // Load Recent Applications
+        async function loadRecentApplications() {
+            try {
+                const response = await fetch(`${API_URL}/applications`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const recentApps = result.data.slice(0, 5);
+                    const tbody = document.getElementById('recentApplicationsTable');
+
+                    if (recentApps.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-gray-500">No applications found</td></tr>';
+                        return;
+                    }
+
+                    tbody.innerHTML = recentApps.map(app => `
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="py-3 px-4 font-semibold text-red-600">${app.appNo}</td>
+              <td class="py-3 px-4">${app.propertyName}</td>
+              <td class="py-3 px-4">${app.applicantName}</td>
+              <td class="py-3 px-4">${new Date(app.submittedDate).toLocaleDateString()}</td>
+              <td class="py-3 px-4">
+                <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass}">
+                  ${app.status}
+                </span>
+              </td>
+            </tr>
+          `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading recent applications:', error);
+            }
+        }
+
+        // Load All Applications
+        async function loadAllApplications() {
+            try {
+                const response = await fetch(`${API_URL}/applications`);
+                const result = await response.json();
+
+                if (result.success) {
+                    allApplications = result.data;
+                    displayApplications(allApplications);
+                }
+            } catch (error) {
+                console.error('Error loading applications:', error);
+            }
+        }
+
+        // Display Applications
+        function displayApplications(apps) {
+            const tbody = document.getElementById('applicationsTable');
+
+            if (apps.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-gray-500">No applications found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = apps.map(app => `
+        <tr class="border-b border-gray-200 hover:bg-gray-50">
+          <td class="py-3 px-4 font-semibold text-red-600">${app.appNo}</td>
+          <td class="py-3 px-4">${app.propertyName}</td>
+          <td class="py-3 px-4">${app.applicantName}</td>
+          <td class="py-3 px-4">${app.buildingType}</td>
+          <td class="py-3 px-4">${new Date(app.submittedDate).toLocaleDateString()}</td>
+          <td class="py-3 px-4">
+            <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass}">
+              ${app.status}
+            </span>
+          </td>
+          <td class="py-3 px-4">
+            <button onclick="viewApplication('${app.appNo}')" class="text-blue-600 hover:text-blue-700 mr-2">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button onclick="showUpdateModal('${app.appNo}')" class="text-green-600 hover:text-green-700 mr-2">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteApplication('${app.appNo}')" class="text-red-600 hover:text-red-700">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        // Filter Applications
+        async function filterApplications() {
+            const status = document.getElementById('statusFilter').value;
+            const search = document.getElementById('searchInput').value;
+
+            try {
+                const params = new URLSearchParams();
+                if (status !== 'all') params.append('status', status);
+                if (search) params.append('search', search);
+
+                const response = await fetch(`${API_URL}/applications?${params}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    displayApplications(result.data);
+                }
+            } catch (error) {
+                console.error('Error filtering applications:', error);
+            }
+        }
+
+        // View Application Details
+        async function viewApplication(appNo) {
+            try {
+                const response = await fetch(`${API_URL}/applications/${appNo}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const app = result.data;
+                    document.getElementById('modalContent').innerHTML = `
+            <div class="space-y-6">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p class="text-sm text-gray-600 font-semibold">Application No</p>
+                  <p class="text-lg font-bold text-red-600">${app.appNo}</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 font-semibold">Status</p>
+                  <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass}">
+                    ${app.status}
+                  </span>
+                </div>
+              </div>
+
+              <div class="border-t pt-4">
+                <h4 class="text-lg font-bold text-gray-800 mb-3">Property Details</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-sm text-gray-600">Property Name</p>
+                    <p class="font-semibold">${app.propertyName}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Building Type</p>
+                    <p class="font-semibold">${app.buildingType}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Plot Number</p>
+                    <p class="font-semibold">${app.plotNumber}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Built-up Area</p>
+                    <p class="font-semibold">${app.builtupArea} sq.ft</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Number of Floors</p>
+                    <p class="font-semibold">${app.floors}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Address</p>
+                    <p class="font-semibold">${app.address}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-t pt-4">
+                <h4 class="text-lg font-bold text-gray-800 mb-3">Applicant Details</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-sm text-gray-600">Name</p>
+                    <p class="font-semibold">${app.applicantName}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Type</p>
+                    <p class="font-semibold">${app.applicantType}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Mobile</p>
+                    <p class="font-semibold">${app.mobile}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Email</p>
+                    <p class="font-semibold">${app.email}</p>
+                  </div>
+                </div>
+              </div>
+
+              ${app.remarks ? `
+              <div class="border-t pt-4">
+                <h4 class="text-lg font-bold text-gray-800 mb-2">Remarks</h4>
+                <p class="text-gray-700">${app.remarks}</p>
+              </div>
+              ` : ''}
+
+              <div class="border-t pt-4 flex gap-3">
+                <button onclick="showUpdateModal('${app.appNo}')" class="flex-1 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
+                  <i class="fas fa-edit mr-2"></i>Update Status
+                </button>
+                <button onclick="closeModal()" class="flex-1 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700">
+                  Close
+                </button>
+              </div>
+            </div>
+          `;
+                    document.getElementById('detailModal').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error viewing application:', error);
+                alert('Error loading application details');
+            }
+        }
+
+        // Show Update Modal
+        function showUpdateModal(appNo) {
+            const app = allApplications.find(a => a.appNo === appNo);
+
+            document.getElementById('modalContent').innerHTML = `
+        <form onsubmit="updateStatus(event, '${appNo}')" class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2">Update Status</label>
+            <select id="newStatus" required class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
+              <option value="Submitted" ${app.status === 'Submitted' ? 'selected' : ''}>Submitted</option>
+              <option value="Under Review" ${app.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+              <option value="Approved" ${app.status === 'Approved' ? 'selected' : ''}>Approved</option>
+              <option value="Rejected" ${app.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2">Remarks (Optional)</label>
+            <textarea id="remarks" rows="4" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter any remarks or comments">${app.remarks || ''}</textarea>
+          </div>
+
+          <div class="flex gap-3">
+            <button type="submit" class="flex-1 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
+              <i class="fas fa-save mr-2"></i>Save Changes
+            </button>
+            <button type="button" onclick="closeModal()" class="flex-1 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700">
+              Cancel
+            </button>
+          </div>
+        </form>
+      `;
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        // Update Status
+        async function updateStatus(event, appNo) {
+            event.preventDefault();
+
+            const status = document.getElementById('newStatus').value;
+            const remarks = document.getElementById('remarks').value;
+
+            try {
+                const response = await fetch(`${API_URL}/applications/${appNo}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status,
+                        remarks,
+                        reviewedBy: currentAdmin.username
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Status updated successfully!');
+                    closeModal();
+                    loadDashboard();
+                } else {
+                    alert('Error updating status: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Error updating status. Please try again.');
+            }
+        }
+
+        // Delete Application
+        async function deleteApplication(appNo) {
+            if (!confirm(`Are you sure you want to delete application ${appNo}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/applications/${appNo}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Application deleted successfully!');
+                    loadDashboard();
+                } else {
+                    alert('Error deleting application: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error deleting application:', error);
+                alert('Error deleting application. Please try again.');
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // Show Section
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            if (section === 'dashboard') {
+                document.getElementById('dashboardSection').classList.remove('hidden');
+                document.querySelectorAll('.nav-item')[0].classList.add('active');
+            } else if (section === 'applications') {
+                document.getElementById('applicationsSection').classList.remove('hidden');
+                document.querySelectorAll('.nav-item')[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
