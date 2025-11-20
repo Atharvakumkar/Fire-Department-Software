@@ -98,8 +98,16 @@ const safetyReviewSchema = new mongoose.Schema({
   },
   status: { 
     type: String, 
-    enum: ['draft', 'submitted', 'reviewed', 'approved', 'rejected'], 
-    default: 'submitted'
+    enum: ['Submitted', 'Under Review', 'Approved', 'Rejected'], 
+    default: 'Submitted'
+  },
+  remarks: { 
+    type: String, 
+    default: '' 
+  },
+  reviewedBy: { 
+    type: String, 
+    default: '' 
   },
   lastUpdated: { 
     type: Date, 
