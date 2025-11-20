@@ -194,8 +194,9 @@ app.post('/api/admin/login', async (req, res) => {
   }
 });
 
-// Create Default Admin (run once)
-app.post('/api/admin/create-default', async (req, res) => {
+// Replace your current POST endpoint with this GET endpoint
+// Create Default Admin (run once) - GET version
+app.get('/api/admin/create-default', async (req, res) => {
   try {
     const existingAdmin = await Admin.findOne({ username: 'admin' });
     
