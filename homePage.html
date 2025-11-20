@@ -15,6 +15,18 @@
   />
 
   <title>Fire Department Sidebar</title>
+
+  <style>
+    /* overlay + micro-animations */
+    .countdown-overlay {
+      backdrop-filter: blur(2px);
+      background: rgba(0,0,0,0.45);
+    }
+    .scale-up {
+      transform: scale(1.03);
+      transition: transform .18s ease-in-out;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 font-sans">
   <!-- Page grid: sidebar + main content -->
@@ -25,7 +37,7 @@
       
       <!-- Logo circle -->
       <div class="w-[50px] h-[50px] bg-red-700 rounded-full flex items-center justify-center mb-10">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-white">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-white" aria-hidden="true">
           <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
         </svg>
       </div>
@@ -33,46 +45,42 @@
       <!-- Nav items -->
       <nav class="flex flex-col gap-2 w-full">
         <!-- Active item -->
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700">
-          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24">
+        <a href="homePage.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
           </svg>
           <span class="text-[11px] font-medium text-white">Dashboard</span>
         </a>
 
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
+        <a href="inspectionPage.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
           </svg>
           <span class="text-[11px] font-medium text-red-700">Inspections</span>
         </a>
 
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
+        <a href="nocPage.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
           </svg>
           <span class="text-[11px] font-medium text-red-700">NOCs</span>
         </a>
 
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="infoIconTitle" xmlns="http://www.w3.org/2000/svg">
-    <title id="infoIconTitle">Info</title>
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-  </svg>
-  <span class="text-[11px] font-medium text-red-700">Tips</span>
-</a>
+        <a href="safety_tips.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="infoIconTitle" xmlns="http://www.w3.org/2000/svg">
+            <title id="infoIconTitle">Info</title>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700">Tips</span>
+        </a>
 
-
-    <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="emergencyPhoneTitle" xmlns="http://www.w3.org/2000/svg">
-    <title id="emergencyPhoneTitle">Emergency Contacts</title>
-    <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/>
-  </svg>
-  <span class="text-[11px] font-medium text-red-700">Emergency</span>
-</a>
-
-
-
+        <a href="contactsPage.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="emergencyPhoneTitle" xmlns="http://www.w3.org/2000/svg">
+            <title id="emergencyPhoneTitle">Emergency Contacts</title>
+            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700">Emergency</span>
+        </a>
       </nav>
     </aside>
 
@@ -92,14 +100,13 @@
       <div class="flex justify-center gap-8 mb-12">
         
         <!-- SOS Button -->
-        <button
-          class="w-[300px] h-[300px] bg-white border-8 border-red-900 rounded-full flex flex-col items-center justify-center cursor-pointer shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95"
-          onclick="handleSOS()"
-        >
-          <svg class="w-20 h-20 mb-3 fill-red-700 animate-pulse" viewBox="0 0 24 24">
+        <button id="sosBtn"
+          class="w-[300px] h-[300px] bg-white border-8 border-red-900 rounded-full flex flex-col items-center justify-center cursor-pointer shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95 animate-pulse duration-[1ms]"
+          aria-label="Send SOS">
+          <svg class="w-20 h-20 mb-3 fill-red-700" viewBox="0 0 24 24" role="img" aria-hidden="true">
             <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z"/>
           </svg>
-          <span class="text-red-700 text-3xl font-bold tracking-[0.25em] animate-pulse">SOS</span>
+          <span class="text-red-700 text-3xl font-bold tracking-[0.25em]">SOS</span>
         </button>
 
         <!-- SOS Info -->
@@ -116,7 +123,7 @@
 
         <!-- Card 1 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
-          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
+          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7" aria-hidden="true"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Fire NOC Application</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
             Apply for Fire NOC online with a quick and secure process. Upload documents, track status in real time, and receive timely notifications for faster and transparent approvals.
@@ -130,41 +137,42 @@
 
         <!-- Card 2 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
-          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
+          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7" aria-hidden="true"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Safety Code Review</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
             Conduct thorough reviews of building safety measures to ensure full compliance with fire safety regulations. Identify risks early and take corrective action for a safer environment.
           </p>
 
           <!-- CENTERED BUTTON -->
-          <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
+          <a href="inspectionPage.html" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
             View
           </a>
         </div>
 
         <!-- Card 3 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
-          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
+          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7" aria-hidden="true"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Important Contacts</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
-            Maintain an organized directory of essential emergency contacts to ensure quick access during emergencies. Streamline communication and stay prepared with reliable information readily available whenever needed.
+            Maintain an organized directory of essential emergency contacts to ensure quick access during emergencies. Stay prepared with reliable information readily available whenever needed.
+          </p>
 
           <!-- CENTERED BUTTON -->
-          <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
+          <a href="contactsPage.html" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
             View
           </a>
         </div>
 
         <!-- Card 4 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
-          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
+          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7" aria-hidden="true"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Fire Safety Tips</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
             Stay informed with essential fire safety guidelines that reduce risks, improve awareness, and promote responsible habits, ensuring safer daily environments and helping prevent emergencies.
           </p>
 
           <!-- CENTERED BUTTON -->
-          <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
+          <a href="safety_tips.html" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
             View
           </a>
         </div>
@@ -173,12 +181,190 @@
     </div>
   </div>
 
+  <!-- COUNTDOWN OVERLAY -->
+  <div id="overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center countdown-overlay">
+    <div class="bg-white rounded-xl p-6 w-[320px] text-center scale-up">
+      <h3 class="text-xl font-semibold text-red-700 mb-3">Sending SOS</h3>
+      <p id="countdownText" class="text-4xl font-bold text-red-700 mb-4">3</p>
+      <div class="flex gap-3 justify-center">
+        <button id="cancelBtn" class="px-4 py-2 rounded-lg border border-gray-300">Cancel</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-3">You can cancel within the countdown.</p>
+    </div>
+  </div>
+
+  <!-- HELP ON THE WAY CARD (shown after sending) -->
+  <div id="helpCard" class="hidden fixed top-8 right-8 z-40 bg-white rounded-xl p-6 shadow-xl w-[320px]">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0">
+        <svg class="w-10 h-10 fill-green-600" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5l-3.5-3.5 1.4-1.4L11 13.67l5.6-5.6L18 9.5 11 16.5z"/></svg>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg">Help is on the way</h4>
+        <p class="text-sm text-gray-600 mt-1" id="incidentText">Incident ID: —</p>
+        <div class="mt-4 flex gap-2">
+          <a id="openWhatsAppBtn" href="#" target="_blank" rel="noreferrer" class="flex-1 inline-block text-center bg-green-600 text-white px-3 py-2 rounded">Open WhatsApp</a>
+          <a href="contactsPage.html" class="inline-block bg-red-600 text-white px-3 py-2 rounded">Contacts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function handleSOS() {
-      if (confirm('Emergency SOS activated! Are you sure you want to send an emergency alert?')) {
-        alert('Emergency services have been notified!');
+    /**********************************************
+     * Configuration: replace with your number
+     * e.g. const WHATSAPP_NUMBER = '919812345678';
+     **********************************************/
+    const WHATSAPP_NUMBER = '917045727768';
+
+    // Utilities
+    function generateIncidentId() {
+      const t = Date.now().toString(36);
+      const r = Math.floor(Math.random() * 9000 + 1000).toString(36);
+      return `AG-${t}-${r}`.toUpperCase();
+    }
+
+    // DOM
+    const sosBtn = document.getElementById('sosBtn');
+    const overlay = document.getElementById('overlay');
+    const countdownText = document.getElementById('countdownText');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const helpCard = document.getElementById('helpCard');
+    const incidentText = document.getElementById('incidentText');
+    const openWhatsAppBtn = document.getElementById('openWhatsAppBtn');
+
+    let countdown = null;
+    let secondsLeft = 3;
+    let activeIncident = null;
+
+    // Start countdown on single click
+    sosBtn.addEventListener('click', async () => {
+      // show overlay
+      secondsLeft = 3;
+      countdownText.textContent = secondsLeft;
+      overlay.classList.remove('hidden');
+
+      // start countdown
+      countdown = setInterval(() => {
+        secondsLeft -= 1;
+        countdownText.textContent = secondsLeft;
+        if (secondsLeft <= 0) {
+          clearInterval(countdown);
+          overlay.classList.add('hidden');
+          triggerSOS();
+        }
+      }, 1000);
+    });
+
+    // Cancel
+    cancelBtn.addEventListener('click', () => {
+      clearInterval(countdown);
+      overlay.classList.add('hidden');
+    });
+
+    // Trigger SOS logic: get location, build message, open WhatsApp and show help UI
+    async function triggerSOS() {
+      const incidentId = generateIncidentId();
+      const timeISO = new Date().toISOString();
+      activeIncident = { id: incidentId, time: timeISO };
+
+      // Try to get geolocation
+      const getPosition = () => {
+        return new Promise((resolve, reject) => {
+          if (!navigator.geolocation) {
+            reject(new Error('Geolocation not supported'));
+            return;
+          }
+          navigator.geolocation.getCurrentPosition(
+            pos => resolve(pos),
+            err => reject(err),
+            { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
+          );
+        });
+      };
+
+      let payload = {
+        id: incidentId,
+        time: timeISO,
+        lat: null,
+        lng: null,
+        accuracy: null,
+        address: null
+      };
+
+      try {
+        const pos = await getPosition();
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const acc = pos.coords.accuracy;
+        payload.lat = lat;
+        payload.lng = lng;
+        payload.accuracy = acc;
+
+        // Build whatsapp message with google maps link
+        const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+        const msg = encodeURIComponent(
+          `🚨 I need help! \nIncident ID: ${incidentId}\nTime: ${new Date(timeISO).toLocaleString()}\nLocation: ${mapsLink}\n\nPlease respond ASAP.`
+        );
+
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+
+        // store simple log locally
+        storeIncidentLog(payload);
+
+        // open WhatsApp in new tab
+        window.open(waUrl, '_blank');
+
+        // Show "Help is on the way" UI
+        showHelpCard(incidentId, waUrl);
+
+      } catch (err) {
+        // geolocation failed/denied — still send message without coordinates
+        console.warn('Geolocation error:', err);
+        const msg = encodeURIComponent(
+          `🚨 I need help! \nIncident ID: ${incidentId}\nTime: ${new Date(timeISO).toLocaleString()}\nLocation: Not available (geolocation denied or failed)\n\nPlease respond ASAP.`
+        );
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+
+        storeIncidentLog(payload); // stores with null lat/lng
+
+        // open WhatsApp anyway
+        window.open(waUrl, '_blank');
+
+        showHelpCard(incidentId, waUrl);
       }
     }
+
+    function showHelpCard(incidentId, waUrl) {
+      incidentText.textContent = `Incident ID: ${incidentId}`;
+      openWhatsAppBtn.href = waUrl;
+      helpCard.classList.remove('hidden');
+
+      // Optionally vibrate device briefly (if supported)
+      if (navigator.vibrate) {
+        navigator.vibrate([200]);
+      }
+
+      // Save active incident for later (localStorage) so admin or you can retrieve it
+      localStorage.setItem('lastIncident', JSON.stringify({ id: incidentId, time: new Date().toISOString() }));
+    }
+
+    function storeIncidentLog(payload) {
+      // Simple local log (replace with a fetch() to your backend endpoint)
+      const existing = JSON.parse(localStorage.getItem('incidentLogs') || '[]');
+      existing.unshift(payload);
+      // keep only last 50 locally
+      localStorage.setItem('incidentLogs', JSON.stringify(existing.slice(0, 50)));
+      console.log('Incident logged locally:', payload);
+    }
+
+    // Safety: hide overlay on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        clearInterval(countdown);
+        overlay.classList.add('hidden');
+      }
+    });
   </script>
 
 </body>
