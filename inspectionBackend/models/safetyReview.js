@@ -17,10 +17,17 @@ const safetyReviewSchema = new mongoose.Schema({
     required: [true, 'Address is required'],
     trim: true
   },
-  floors: { 
+  // FIXED: Use 'numberOfFloors' to match admin panel expectations
+  numberOfFloors: { 
     type: Number, 
     required: [true, 'Number of floors is required'],
     min: [1, 'Floors must be at least 1']
+  },
+  // ADDED: Keep 'floors' as virtual getter for backward compatibility
+  floors: {
+    type: Number,
+    get: function() { return this.numberOfFloors; },
+    set: function(v) { this.numberOfFloors = v; }
   },
   occupancyLoad: { 
     type: Number, 
@@ -92,14 +99,21 @@ const safetyReviewSchema = new mongoose.Schema({
     unique: true, 
     sparse: true 
   },
-  submittedDate: { 
+  // FIXED: Changed to 'createdAt' for consistency
+  createdAt: { 
     type: Date, 
     default: Date.now 
   },
+  // ADDED: Keep submittedDate as alias
+  submittedDate: {
+    type: Date,
+    get: function() { return this.createdAt; }
+  },
+  // FIXED: Changed enum values to match lowercase
   status: { 
     type: String, 
-    enum: ['Submitted', 'Under Review', 'Approved', 'Rejected'], 
-    default: 'Submitted'
+    enum: ['submitted', 'under review', 'approved', 'rejected'], 
+    default: 'submitted'
   },
   remarks: { 
     type: String, 
@@ -113,6 +127,21 @@ const safetyReviewSchema = new mongoose.Schema({
     type: Date, 
     default: Date.now 
   }
+}, {
+  // Enable virtuals in JSON
+  toJSON: { virtuals: true, getters: true },
+  toObject: { virtuals: true, getters: true }
+});
+
+// ADDED: Virtual for statusClass used in admin panel
+safetyReviewSchema.virtual('statusClass').get(function() {
+  const statusMap = {
+    'submitted': 'bg-yellow-600',
+    'under review': 'bg-blue-600',
+    'approved': 'bg-green-600',
+    'rejected': 'bg-red-600'
+  };
+  return statusMap[this.status] || 'bg-gray-600';
 });
 
 // Pre-save hook to generate Review ID
@@ -133,6 +162,6 @@ safetyReviewSchema.pre('save', async function(next) {
 safetyReviewSchema.index({ reviewId: 1 });
 safetyReviewSchema.index({ buildingName: 1 });
 safetyReviewSchema.index({ status: 1 });
-safetyReviewSchema.index({ submittedDate: -1 });
+safetyReviewSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model('SafetyReview', safetyReviewSchema);

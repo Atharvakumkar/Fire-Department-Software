@@ -26,7 +26,6 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: (req, file, cb) => {
-    // Allowed file types
     const allowedTypes = /pdf|jpg|jpeg|png/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
@@ -38,11 +37,6 @@ const upload = multer({
     }
   }
 });
-
-// ============================================================
-// IMPORTANT: Route order matters in Express!
-// Specific routes MUST come before generic ones
-// ============================================================
 
 // ============================================================
 // POST: Submit Safety Review
@@ -78,7 +72,7 @@ router.post('/', upload.fields([
       buildingName,
       buildingType,
       address,
-      floors: Number(floors),
+      numberOfFloors: Number(floors), // FIXED: use numberOfFloors
       occupancyLoad: Number(occupancyLoad),
       yearConstruction: Number(yearConstruction),
       ownerName,
@@ -120,7 +114,7 @@ router.post('/', upload.fields([
         additionalDocs: req.files?.additionalDocs?.[0]?.path
       },
 
-      status: 'submitted'
+      status: 'submitted' // FIXED: lowercase
     });
 
     // Save to database
@@ -131,7 +125,7 @@ router.post('/', upload.fields([
       message: 'Safety review submitted successfully',
       data: {
         reviewId: safetyReview.reviewId,
-        submittedDate: safetyReview.submittedDate,
+        submittedDate: safetyReview.createdAt,
         status: safetyReview.status
       }
     });
@@ -145,11 +139,7 @@ router.post('/', upload.fields([
 });
 
 // ============================================================
-// SPECIFIC ROUTES FIRST (before generic /:id routes)
-// ============================================================
-
-// ============================================================
-// GET: Fetch Safety Review by Review ID (e.g., SR-123456-1)
+// GET: Fetch Safety Review by Review ID
 // ============================================================
 router.get('/review/:reviewId', async (req, res) => {
   try {
@@ -184,7 +174,7 @@ router.get('/stats/summary', async (req, res) => {
     const submitted = await SafetyReview.countDocuments({ status: 'submitted' });
     const approved = await SafetyReview.countDocuments({ status: 'approved' });
     const rejected = await SafetyReview.countDocuments({ status: 'rejected' });
-    const reviewed = await SafetyReview.countDocuments({ status: 'reviewed' });
+    const reviewed = await SafetyReview.countDocuments({ status: 'under review' });
 
     res.status(200).json({
       success: true,
@@ -206,17 +196,30 @@ router.get('/stats/summary', async (req, res) => {
 });
 
 // ============================================================
-// GENERIC ROUTES (/:id routes) - MUST BE AFTER SPECIFIC ROUTES
-// ============================================================
-
-// ============================================================
-// GET: Fetch All Safety Reviews (root)
+// GET: Fetch All Safety Reviews
 // ============================================================
 router.get('/', async (req, res) => {
   try {
-    const reviews = await SafetyReview.find()
-      .select('reviewId buildingName buildingType address ownerName submittedDate status')
-      .sort({ submittedDate: -1 });
+    const { status, q } = req.query;
+    let query = {};
+    
+    // Filter by status if provided
+    if (status && status !== 'all') {
+      query.status = status.toLowerCase();
+    }
+    
+    // Search functionality
+    if (q) {
+      query.$or = [
+        { buildingName: { $regex: q, $options: 'i' } },
+        { ownerName: { $regex: q, $options: 'i' } },
+        { reviewId: { $regex: q, $options: 'i' } }
+      ];
+    }
+    
+    const reviews = await SafetyReview.find(query)
+      .select('reviewId buildingName buildingType address ownerName createdAt status numberOfFloors')
+      .sort({ createdAt: -1 });
     
     res.status(200).json({
       success: true,
@@ -234,13 +237,14 @@ router.get('/', async (req, res) => {
 
 // ============================================================
 // PUT: Update Safety Review Status
+// FIXED: Changed from PATCH to PUT to match frontend
 // ============================================================
 router.put('/:id/status', async (req, res) => {
   try {
-    const { status } = req.body;
-    const validStatuses = ['draft', 'submitted', 'reviewed', 'approved', 'rejected'];
+    const { status, remarks, reviewedBy } = req.body;
+    const validStatuses = ['submitted', 'under review', 'approved', 'rejected'];
     
-    if (!status || !validStatuses.includes(status)) {
+    if (!status || !validStatuses.includes(status.toLowerCase())) {
       return res.status(400).json({ 
         success: false, 
         message: `Invalid status. Must be one of: ${validStatuses.join(', ')}` 
@@ -248,19 +252,27 @@ router.put('/:id/status', async (req, res) => {
     }
 
     let review;
+    const updateData = { 
+      status: status.toLowerCase(), 
+      lastUpdated: Date.now() 
+    };
     
-    // First, try to find by MongoDB _id
+    // Add optional fields if provided
+    if (remarks !== undefined) updateData.remarks = remarks;
+    if (reviewedBy !== undefined) updateData.reviewedBy = reviewedBy;
+    
+    // Try to find by MongoDB _id
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       review = await SafetyReview.findByIdAndUpdate(
         req.params.id,
-        { status, lastUpdated: Date.now() },
+        updateData,
         { new: true }
       );
     } else {
-      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      // Try by reviewId
       review = await SafetyReview.findOneAndUpdate(
         { reviewId: req.params.id },
-        { status, lastUpdated: Date.now() },
+        updateData,
         { new: true }
       );
     }
@@ -292,19 +304,26 @@ router.put('/:id/status', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     let review;
+    const updateData = { ...req.body, lastUpdated: Date.now() };
     
-    // First, try to find by MongoDB _id
+    // Handle floors field mapping
+    if (updateData.floors) {
+      updateData.numberOfFloors = updateData.floors;
+      delete updateData.floors;
+    }
+    
+    // Try to find by MongoDB _id
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       review = await SafetyReview.findByIdAndUpdate(
         req.params.id,
-        { ...req.body, lastUpdated: Date.now() },
+        updateData,
         { new: true, runValidators: true }
       );
     } else {
-      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      // Try by reviewId
       review = await SafetyReview.findOneAndUpdate(
         { reviewId: req.params.id },
-        { ...req.body, lastUpdated: Date.now() },
+        updateData,
         { new: true, runValidators: true }
       );
     }
@@ -332,17 +351,16 @@ router.put('/:id', async (req, res) => {
 
 // ============================================================
 // GET: Fetch Single Safety Review by ID or Review ID
-// IMPORTANT: This MUST be last because it matches any /:id
 // ============================================================
 router.get('/:id', async (req, res) => {
   try {
     let review;
     
-    // First, try to find by MongoDB _id
+    // Try to find by MongoDB _id
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       review = await SafetyReview.findById(req.params.id);
     } else {
-      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      // Try by reviewId
       review = await SafetyReview.findOne({ reviewId: req.params.id });
     }
     
@@ -367,17 +385,17 @@ router.get('/:id', async (req, res) => {
 });
 
 // ============================================================
-// DELETE: Delete Safety Review by MongoDB ID or Review ID
+// DELETE: Delete Safety Review
 // ============================================================
 router.delete('/:id', async (req, res) => {
   try {
     let review;
     
-    // First, try to find by MongoDB _id
+    // Try to find by MongoDB _id
     if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
       review = await SafetyReview.findByIdAndDelete(req.params.id);
     } else {
-      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      // Try by reviewId
       review = await SafetyReview.findOneAndDelete({ reviewId: req.params.id });
     }
     
