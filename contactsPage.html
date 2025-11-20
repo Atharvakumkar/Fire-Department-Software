@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Important Contacts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+    .card-focus:focus{outline:3px solid rgba(239,68,68,0.4);outline-offset:3px}
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-[86px] bg-white min-h-screen flex flex-col items-center py-5 border-r-2 border-gray-200">
+      
+      <!-- Logo circle -->
+      <div class="w-[50px] h-[50px] bg-red-700 rounded-full flex items-center justify-center mb-10">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] fill-white">
+          <path d="M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z"/>
+        </svg>
+      </div>
+
+      <!-- Nav items -->
+      <nav class="flex flex-col gap-2 w-full">
+        <!-- Active item -->
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700">
+          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24">
+            <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-white">Dashboard</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
+            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700">Inspections</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
+          </svg>
+          <span class="text-[11px] font-medium text-red-700">NOCs</span>
+        </a>
+
+        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="infoIconTitle" xmlns="http://www.w3.org/2000/svg">
+    <title id="infoIconTitle">Info</title>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+  </svg>
+  <span class="text-[11px] font-medium text-red-700">Tips</span>
+</a>
+
+
+    <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="emergencyPhoneTitle" xmlns="http://www.w3.org/2000/svg">
+    <title id="emergencyPhoneTitle">Emergency Contacts</title>
+    <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/>
+  </svg>
+  <span class="text-[11px] font-medium text-red-700">Emergency</span>
+</a>
+
+
+
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 relative p-6 overflow-y-auto">
+      <div class="absolute inset-x-0 top-0 h-1 bg-red-600 shadow-md" aria-hidden="true"></div>
+
+      <header class="pb-5 border-b-4 border-red-600 mb-6">
+        <h1 class="text-3xl font-bold text-red-600">Important Contacts</h1>
+        <p class="text-gray-600">Maintain an organized directory of essential emergency contacts for quick access during emergencies.</p>
+      </header>
+
+      <!-- Controls -->
+      <section class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div class="flex items-center gap-3 w-full md:w-2/3">
+          <label for="search" class="sr-only">Search contacts</label>
+          <div class="relative w-full">
+            <input id="search" type="search" placeholder="Search by name, role, or phone" class="w-full rounded-xl border border-gray-200 p-3 pl-10 shadow-sm focus:ring-2 focus:ring-red-400" />
+            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button id="addContactBtn" class="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-xl shadow hover:bg-red-700 focus:ring-2 focus:ring-red-400" aria-haspopup="dialog">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Add Contact</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Contacts grid/list -->
+      <section id="contactsSection" aria-live="polite">
+        <div id="contactsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- contact cards inserted here by JS -->
+        </div>
+
+        <p id="emptyState" class="text-gray-500 mt-6 hidden">No contacts match your search. Use "Add Contact" to create a new entry.</p>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- Add/Edit Contact Modal -->
+  <div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 relative">
+      <button id="modalCloseBtn" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200" aria-label="Close dialog">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+
+      <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add Contact</h2>
+
+      <form id="contactForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full name</label>
+          <input id="contactName" type="text" required class="mt-1 block w-full rounded-md border border-gray-200 p-3" placeholder="Ex: Fire Station No. 1" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Role / Title</label>
+            <input id="contactRole" type="text" class="mt-1 block w-full rounded-md border border-gray-200 p-3" placeholder="Ex: Fire Department" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Phone</label>
+            <input id="contactPhone" type="tel" required class="mt-1 block w-full rounded-md border border-gray-200 p-3" placeholder="Ex: +91 22 1234 5678" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Address / Notes</label>
+          <input id="contactAddress" type="text" class="mt-1 block w-full rounded-md border border-gray-200 p-3" placeholder="Optional: Hospital name, building manager, etc." />
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" id="cancelBtn" class="px-4 py-2 rounded-xl border border-gray-200">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl bg-red-600 text-white">Save Contact</button>
+        </div>
+
+        <input id="contactId" type="hidden" />
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="confirmModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+      <h3 class="text-lg font-semibold mb-4">Delete contact?</h3>
+      <p class="text-gray-600 mb-6">This action cannot be undone. Are you sure you want to remove this contact?</p>
+      <div class="flex justify-end gap-3">
+        <button id="cancelDelete" class="px-4 py-2 rounded-xl border">Cancel</button>
+        <button id="confirmDelete" class="px-4 py-2 rounded-xl bg-red-600 text-white">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Sample data (sensible defaults). You can replace with API calls.
+    let contacts = [
+      { id: 1, name: 'Fire Station No. 1', role: 'Fire Department', phone: '+91 22 1234 5678', address: 'Ward 12, Central Road' },
+      { id: 2, name: 'Ambulance Service', role: 'Emergency Medical', phone: '+91 22 9999 1111', address: '24/7 Ambulance' },
+      { id: 3, name: 'Local Police', role: 'Police Station', phone: '+91 22 100', address: 'Sector B Police Chowki' }
+    ];
+
+    // DOM refs
+    const contactsGrid = document.getElementById('contactsGrid');
+    const emptyState = document.getElementById('emptyState');
+    const searchInput = document.getElementById('search');
+    const addContactBtn = document.getElementById('addContactBtn');
+
+    const contactModal = document.getElementById('contactModal');
+    const contactForm = document.getElementById('contactForm');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    const contactName = document.getElementById('contactName');
+    const contactRole = document.getElementById('contactRole');
+    const contactPhone = document.getElementById('contactPhone');
+    const contactAddress = document.getElementById('contactAddress');
+    const contactId = document.getElementById('contactId');
+
+    const confirmModal = document.getElementById('confirmModal');
+    const cancelDelete = document.getElementById('cancelDelete');
+    const confirmDelete = document.getElementById('confirmDelete');
+
+    // Utility: render contacts
+    function renderContacts(filter = '') {
+      const q = filter.trim().toLowerCase();
+      const filtered = contacts.filter(c => {
+        return c.name.toLowerCase().includes(q) || (c.role||'').toLowerCase().includes(q) || (c.phone||'').toLowerCase().includes(q) || (c.address||'').toLowerCase().includes(q);
+      });
+
+      contactsGrid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      filtered.forEach(c => {
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-xl p-4 shadow-sm flex flex-col justify-between card-focus';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-labelledby', `contact-${c.id}-name`);
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 id="contact-${c.id}-name" class="text-lg font-semibold text-gray-900">${escapeHtml(c.name)}</h3>
+                <p class="text-sm text-gray-600">${escapeHtml(c.role || '')}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="edit-btn p-2 rounded-md hover:bg-gray-100" data-id="${c.id}" title="Edit contact"><i class="fas fa-pen" aria-hidden="true"></i><span class="sr-only">Edit</span></button>
+                <button class="call-btn p-2 rounded-md hover:bg-gray-100" data-phone="${escapeHtml(c.phone)}" title="Call"><i class="fas fa-phone" aria-hidden="true"></i><span class="sr-only">Call</span></button>
+                <button class="delete-btn p-2 rounded-md hover:bg-gray-100" data-id="${c.id}" title="Delete"><i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></button>
+              </div>
+            </div>
+
+            <p class="mt-3 text-sm text-gray-700 break-words"><strong>Phone:</strong> <a href="tel:${encodeURIComponent(c.phone)}" class="text-red-600 hover:underline">${escapeHtml(c.phone)}</a></p>
+            ${c.address ? `<p class="mt-1 text-sm text-gray-700"><strong>Address:</strong> ${escapeHtml(c.address)}</p>` : ''}
+          </div>
+        `;
+
+        contactsGrid.appendChild(card);
+      });
+
+      // attach actions
+      document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', onEdit));
+      document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', onDeleteRequested));
+      document.querySelectorAll('.call-btn').forEach(btn => btn.addEventListener('click', onCallClicked));
+    }
+
+    // Escape HTML to prevent injection (this is a tiny helper for demo)
+    function escapeHtml(str) {
+      if (!str && str !== 0) return '';
+      return String(str).replace(/[&<>"']/g, function(s) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[s]; });
+    }
+
+    // Open add modal
+    addContactBtn.addEventListener('click', () => {
+      openContactModal();
+    });
+
+    // Search
+    searchInput.addEventListener('input', (e) => {
+      renderContacts(e.target.value);
+    });
+
+    // Modal open/close
+    function openContactModal(existing = null) {
+      if (existing) {
+        document.getElementById('modalTitle').textContent = 'Edit Contact';
+        contactName.value = existing.name || '';
+        contactRole.value = existing.role || '';
+        contactPhone.value = existing.phone || '';
+        contactAddress.value = existing.address || '';
+        contactId.value = existing.id;
+      } else {
+        document.getElementById('modalTitle').textContent = 'Add Contact';
+        contactForm.reset();
+        contactId.value = '';
+      }
+      contactModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      contactName.focus();
+    }
+
+    function closeContactModal() {
+      contactModal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    modalCloseBtn.addEventListener('click', closeContactModal);
+    cancelBtn.addEventListener('click', (e) => { e.preventDefault(); closeContactModal(); });
+
+    // Submit form
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = contactId.value ? Number(contactId.value) : null;
+      const payload = {
+        id: id || Date.now(),
+        name: contactName.value.trim(),
+        role: contactRole.value.trim(),
+        phone: contactPhone.value.trim(),
+        address: contactAddress.value.trim()
+      };
+
+      if (!payload.name || !payload.phone) {
+        alert('Please enter at least a name and phone number.');
+        return;
+      }
+
+      if (id) {
+        // update
+        contacts = contacts.map(c => c.id === id ? payload : c);
+      } else {
+        // add to top
+        contacts.unshift(payload);
+      }
+
+      closeContactModal();
+      renderContacts(searchInput.value);
+    });
+
+    // Edit handler
+    function onEdit(e) {
+      const id = Number(e.currentTarget.getAttribute('data-id'));
+      const existing = contacts.find(c => c.id === id);
+      if (existing) openContactModal(existing);
+    }
+
+    // Delete flow
+    let pendingDeleteId = null;
+    function onDeleteRequested(e) {
+      pendingDeleteId = Number(e.currentTarget.getAttribute('data-id'));
+      confirmModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    cancelDelete.addEventListener('click', () => { confirmModal.classList.add('hidden'); document.body.style.overflow = 'auto'; pendingDeleteId = null; });
+    confirmDelete.addEventListener('click', () => {
+      if (pendingDeleteId !== null) contacts = contacts.filter(c => c.id !== pendingDeleteId);
+      pendingDeleteId = null;
+      confirmModal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      renderContacts(searchInput.value);
+    });
+
+    // Call button -> for demo we just alert or could open tel: link
+    function onCallClicked(e) {
+      const phone = e.currentTarget.getAttribute('data-phone');
+      // in real app: window.location.href = `tel:${phone}`;
+      alert('Calling: ' + phone);
+    }
+
+    // Keyboard: close modals with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!contactModal.classList.contains('hidden')) closeContactModal();
+        if (!confirmModal.classList.contains('hidden')) { confirmModal.classList.add('hidden'); document.body.style.overflow = 'auto'; }
+      }
+    });
+
+    // Initial render
+    renderContacts();
+
+    // Import placeholder (CSV) -- lightweight implementation
+    document.getElementById('importBtn').addEventListener('click', () => {
+      const csv = prompt('Paste CSV rows (name,role,phone,address) — one per line');
+      if (!csv) return;
+      const rows = csv.split('\n').map(r => r.trim()).filter(Boolean);
+      rows.forEach(r => {
+        const parts = r.split(',').map(p => p.trim());
+        if (parts.length >= 2) {
+          contacts.unshift({ id: Date.now() + Math.random(), name: parts[0], role: parts[1] || '', phone: parts[2] || '', address: parts[3] || '' });
+        }
+      });
+      renderContacts(searchInput.value);
+    });
+
+    // Small enhancement: clicking Enter on a focused card opens edit
+    contactsGrid.addEventListener('keydown', (e) => {
+      const article = e.target.closest('article');
+      if (!article) return;
+      if (e.key === 'Enter') {
+        const idLabel = article.getAttribute('aria-labelledby');
+        if (idLabel) {
+          const id = Number(idLabel.replace('contact-','').replace('-name',''));
+          const existing = contacts.find(c => c.id === id);
+          if (existing) openContactModal(existing);
+        }
+      }
+    });
+
+    // Note: In production, replace local array with API persistence and secure validation.
+  </script>
+</body>
+</html>
