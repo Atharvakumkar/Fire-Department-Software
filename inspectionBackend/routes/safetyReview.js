@@ -40,6 +40,11 @@ const upload = multer({
 });
 
 // ============================================================
+// IMPORTANT: Route order matters in Express!
+// Specific routes MUST come before generic ones
+// ============================================================
+
+// ============================================================
 // POST: Submit Safety Review
 // ============================================================
 router.post('/', upload.fields([
@@ -140,54 +145,8 @@ router.post('/', upload.fields([
 });
 
 // ============================================================
-// GET: Fetch All Safety Reviews
+// SPECIFIC ROUTES FIRST (before generic /:id routes)
 // ============================================================
-router.get('/', async (req, res) => {
-  try {
-    const reviews = await SafetyReview.find()
-      .select('reviewId buildingName buildingType address ownerName submittedDate status')
-      .sort({ submittedDate: -1 });
-    
-    res.status(200).json({
-      success: true,
-      count: reviews.length,
-      data: reviews
-    });
-  } catch (error) {
-    console.error('Error fetching reviews:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: error.message || 'Error fetching reviews' 
-    });
-  }
-});
-
-// ============================================================
-// GET: Fetch Single Safety Review by ID
-// ============================================================
-router.get('/:id', async (req, res) => {
-  try {
-    const review = await SafetyReview.findById(req.params.id);
-    
-    if (!review) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Review not found' 
-      });
-    }
-    
-    res.status(200).json({
-      success: true,
-      data: review
-    });
-  } catch (error) {
-    console.error('Error fetching review:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: error.message || 'Error fetching review' 
-    });
-  }
-});
 
 // ============================================================
 // GET: Fetch Safety Review by Review ID (e.g., SR-123456-1)
@@ -212,108 +171,6 @@ router.get('/review/:reviewId', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: error.message || 'Error fetching review' 
-    });
-  }
-});
-
-// ============================================================
-// PUT: Update Safety Review Status
-// ============================================================
-router.put('/:id/status', async (req, res) => {
-  try {
-    const { status } = req.body;
-    const validStatuses = ['draft', 'submitted', 'reviewed', 'approved', 'rejected'];
-    
-    if (!status || !validStatuses.includes(status)) {
-      return res.status(400).json({ 
-        success: false, 
-        message: `Invalid status. Must be one of: ${validStatuses.join(', ')}` 
-      });
-    }
-
-    const review = await SafetyReview.findByIdAndUpdate(
-      req.params.id,
-      { status, lastUpdated: Date.now() },
-      { new: true }
-    );
-
-    if (!review) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Review not found' 
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: 'Status updated successfully',
-      data: review
-    });
-  } catch (error) {
-    console.error('Error updating status:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: error.message || 'Error updating status' 
-    });
-  }
-});
-
-// ============================================================
-// PUT: Update Safety Review (Full Update)
-// ============================================================
-router.put('/:id', async (req, res) => {
-  try {
-    const review = await SafetyReview.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body, lastUpdated: Date.now() },
-      { new: true, runValidators: true }
-    );
-
-    if (!review) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Review not found' 
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: 'Review updated successfully',
-      data: review
-    });
-  } catch (error) {
-    console.error('Error updating review:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: error.message || 'Error updating review' 
-    });
-  }
-});
-
-// ============================================================
-// DELETE: Delete Safety Review
-// ============================================================
-router.delete('/:id', async (req, res) => {
-  try {
-    const review = await SafetyReview.findByIdAndDelete(req.params.id);
-    
-    if (!review) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Review not found' 
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: 'Review deleted successfully',
-      data: review
-    });
-  } catch (error) {
-    console.error('Error deleting review:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: error.message || 'Error deleting review' 
     });
   }
 });
@@ -344,6 +201,203 @@ router.get('/stats/summary', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: error.message || 'Error fetching statistics' 
+    });
+  }
+});
+
+// ============================================================
+// GENERIC ROUTES (/:id routes) - MUST BE AFTER SPECIFIC ROUTES
+// ============================================================
+
+// ============================================================
+// GET: Fetch All Safety Reviews (root)
+// ============================================================
+router.get('/', async (req, res) => {
+  try {
+    const reviews = await SafetyReview.find()
+      .select('reviewId buildingName buildingType address ownerName submittedDate status')
+      .sort({ submittedDate: -1 });
+    
+    res.status(200).json({
+      success: true,
+      count: reviews.length,
+      data: reviews
+    });
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Error fetching reviews' 
+    });
+  }
+});
+
+// ============================================================
+// PUT: Update Safety Review Status
+// ============================================================
+router.put('/:id/status', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const validStatuses = ['draft', 'submitted', 'reviewed', 'approved', 'rejected'];
+    
+    if (!status || !validStatuses.includes(status)) {
+      return res.status(400).json({ 
+        success: false, 
+        message: `Invalid status. Must be one of: ${validStatuses.join(', ')}` 
+      });
+    }
+
+    let review;
+    
+    // First, try to find by MongoDB _id
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      review = await SafetyReview.findByIdAndUpdate(
+        req.params.id,
+        { status, lastUpdated: Date.now() },
+        { new: true }
+      );
+    } else {
+      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      review = await SafetyReview.findOneAndUpdate(
+        { reviewId: req.params.id },
+        { status, lastUpdated: Date.now() },
+        { new: true }
+      );
+    }
+
+    if (!review) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Review not found' 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Status updated successfully',
+      data: review
+    });
+  } catch (error) {
+    console.error('Error updating status:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Error updating status' 
+    });
+  }
+});
+
+// ============================================================
+// PUT: Update Safety Review (Full Update)
+// ============================================================
+router.put('/:id', async (req, res) => {
+  try {
+    let review;
+    
+    // First, try to find by MongoDB _id
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      review = await SafetyReview.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body, lastUpdated: Date.now() },
+        { new: true, runValidators: true }
+      );
+    } else {
+      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      review = await SafetyReview.findOneAndUpdate(
+        { reviewId: req.params.id },
+        { ...req.body, lastUpdated: Date.now() },
+        { new: true, runValidators: true }
+      );
+    }
+
+    if (!review) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Review not found' 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Review updated successfully',
+      data: review
+    });
+  } catch (error) {
+    console.error('Error updating review:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Error updating review' 
+    });
+  }
+});
+
+// ============================================================
+// GET: Fetch Single Safety Review by ID or Review ID
+// IMPORTANT: This MUST be last because it matches any /:id
+// ============================================================
+router.get('/:id', async (req, res) => {
+  try {
+    let review;
+    
+    // First, try to find by MongoDB _id
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      review = await SafetyReview.findById(req.params.id);
+    } else {
+      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      review = await SafetyReview.findOne({ reviewId: req.params.id });
+    }
+    
+    if (!review) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Review not found' 
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: review
+    });
+  } catch (error) {
+    console.error('Error fetching review:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Error fetching review' 
+    });
+  }
+});
+
+// ============================================================
+// DELETE: Delete Safety Review by MongoDB ID or Review ID
+// ============================================================
+router.delete('/:id', async (req, res) => {
+  try {
+    let review;
+    
+    // First, try to find by MongoDB _id
+    if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+      review = await SafetyReview.findByIdAndDelete(req.params.id);
+    } else {
+      // If not a valid MongoDB ObjectId, try reviewId (string format)
+      review = await SafetyReview.findOneAndDelete({ reviewId: req.params.id });
+    }
+    
+    if (!review) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Review not found' 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Review deleted successfully',
+      data: review
+    });
+  } catch (error) {
+    console.error('Error deleting review:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || 'Error deleting review' 
     });
   }
 });
