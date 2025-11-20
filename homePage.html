@@ -42,13 +42,6 @@
 
         <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
           <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
-            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M14 17H7V15H14V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
-          </svg>
-          <span class="text-[11px] font-medium text-red-700">Applications</span>
-        </a>
-
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
             <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
           </svg>
           <span class="text-[11px] font-medium text-red-700">Inspections</span>
@@ -62,11 +55,24 @@
         </a>
 
         <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
-            <path d="M3 13H11V3H3V13M3 21H11V15H3V21M13 21H21V11H13V21M13 3V9H21V3H13Z"/>
-          </svg>
-          <span class="text-[11px] font-medium text-red-700">Tips</span>
-        </a>
+  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="infoIconTitle" xmlns="http://www.w3.org/2000/svg">
+    <title id="infoIconTitle">Info</title>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+  </svg>
+  <span class="text-[11px] font-medium text-red-700">Tips</span>
+</a>
+
+
+    <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
+  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="emergencyPhoneTitle" xmlns="http://www.w3.org/2000/svg">
+    <title id="emergencyPhoneTitle">Emergency Contacts</title>
+    <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/>
+  </svg>
+  <span class="text-[11px] font-medium text-red-700">Emergency</span>
+</a>
+
+
+
       </nav>
     </aside>
 
@@ -77,9 +83,9 @@
       <div class="absolute inset-x-0 top-0 h-1 bg-white shadow-md"></div>
 
       <!-- Main Card / Header -->
-      <div class="pb-5 border-b-4 border-white mb-8">
-        <h2 class="text-[30px] font-bold mb-2 text-white">Main Content Area</h2>
-        <p class="text-white/90">Your dashboard content goes here</p>
+      <div class="pb-5 mb-8">
+        <h2 class="text-[30px] font-bold mb-2 text-white">Agni Bandhu</h2>
+        <p class="text-white/90">Your Trusted Partner in Fire Safety</p>
       </div>
 
       <!-- SOS Section -->
@@ -110,20 +116,6 @@
 
         <!-- Card 1 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
-          <i class="flex justify-center fa-solid fa-house-chimney text-5xl text-red-700 my-7"></i>
-          <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Emergency Response</h2>
-          <p class="text-center font-semibold text-red-700 mb-4 px-4">
-            Trigger rapid emergency support through real-time alerts and precise location tracking, enabling quick response actions that protect lives and ensure immediate assistance.
-          </p>
-          
-          <!-- CENTERED BUTTON -->
-          <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
-            View
-          </a>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
           <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Fire NOC Application</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
@@ -136,13 +128,26 @@
           </a>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Card 2 -->
         <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
           <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
           <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Safety Code Review</h2>
           <p class="text-center font-semibold text-red-700 mb-4 px-4">
             Conduct thorough reviews of building safety measures to ensure full compliance with fire safety regulations. Identify risks early and take corrective action for a safer environment.
           </p>
+
+          <!-- CENTERED BUTTON -->
+          <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
+            View
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white p-6 rounded-xl shadow transition-all duration-300 group-hover:opacity-40 hover:!opacity-100 hover:scale-105">
+          <i class="flex justify-center fa-solid fa-shield-halved text-5xl text-red-700 my-7"></i>
+          <h2 class="text-center font-semibold text-xl md:text-2xl text-red-700 mb-2">Important Contacts</h2>
+          <p class="text-center font-semibold text-red-700 mb-4 px-4">
+            Maintain an organized directory of essential emergency contacts to ensure quick access during emergencies. Streamline communication and stay prepared with reliable information readily available whenever needed.
 
           <!-- CENTERED BUTTON -->
           <a href="#" class="block mx-auto bg-red-600 px-10 py-3 rounded-xl text-[18px] text-white font-semibold text-center">
