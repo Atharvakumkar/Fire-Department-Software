@@ -46,7 +46,7 @@
 <body class="bg-gray-100 font-sans">
   <div class="min-h-screen flex">
 
-       <!-- Sidebar -->
+    <!-- Sidebar -->
     <aside class="w-[86px] bg-red-700 min-h-screen flex flex-col items-center py-5 border-r-2 border-gray-200">
       
       <!-- Logo circle -->
@@ -58,7 +58,6 @@
 
       <!-- Nav items -->
       <nav class="flex flex-col gap-2 w-full">
-        <!-- Active item -->
         <a href="homePage.html" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700 hover:bg-red-800">
           <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
@@ -117,9 +116,8 @@
           <button id="tabMyApps" class="px-4 py-2 rounded-lg bg-white border border-gray-200">My Applications</button>
         </div>
 
-        <!-- Form (same as your original form) -->
+        <!-- Form Section -->
         <div id="formSection">
-          <!-- Form -->
           <form id="safetyReviewForm" class="space-y-8">
 
             <!-- Section 1: Building Information -->
@@ -177,7 +175,7 @@
               </div>
             </div>
 
-            <!-- Section 2: Fire Safety Infrastructure Checklist -->
+            <!-- Section 2: Fire Safety Infrastructure -->
             <div class="bg-white rounded-lg border-l-4 border-red-600 shadow-md p-8">
               <div class="flex items-center gap-4 mb-6">
                 <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -404,96 +402,93 @@
   </div>
 
   <!-- Modal for viewing details -->
-  <!-- Modal for viewing details -->
-<div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-  <div class="bg-white rounded-lg w-11/12 md:w-3/4 p-6 max-h-[80vh] overflow-auto">
-    <div class="flex justify-between items-center mb-4">
-      <h4 class="text-lg font-bold">Application Details (Read-only)</h4>
-      <button id="closeModal" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times"></i></button>
+  <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg w-11/12 md:w-3/4 p-6 max-h-[80vh] overflow-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h4 class="text-lg font-bold">Application Details (Read-only)</h4>
+        <button id="closeModal" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times"></i></button>
+      </div>
+
+      <form id="detailForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-600 text-sm">Building Name</label>
+            <input id="view_buildingName" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Building Type</label>
+            <input id="view_buildingType" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-gray-600 text-sm">Address</label>
+            <textarea id="view_address" rows="2" class="w-full px-3 py-2 border rounded" disabled></textarea>
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Number of Floors</label>
+            <input id="view_floors" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Occupancy Load</label>
+            <input id="view_occupancyLoad" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Year of Construction</label>
+            <input id="view_yearConstruction" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Owner/Applicant Name</label>
+            <input id="view_ownerName" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <div>
+            <label class="block text-gray-600 text-sm">Contact Number</label>
+            <input id="view_contactNumber" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+        </div>
+
+        <hr />
+        <h5 class="font-semibold">Fire Protection Systems</h5>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_fireExtinguishers" disabled /> Fire extinguishers installed</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_hydrants" disabled /> Hydrants available</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_smokeDetectors" disabled /> Smoke detectors functional</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_sprinklers" disabled /> Sprinkler system installed</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_fireAlarm" disabled /> Fire alarm system operational</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_emergencyExits" disabled /> Emergency exits marked</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_firePump" disabled /> Fire pump working</label>
+        </div>
+
+        <hr />
+        <h5 class="font-semibold">Electrical & Structural</h5>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-gray-600 text-sm">Wiring Condition</label>
+            <input id="view_wiringCondition" class="w-full px-3 py-2 border rounded" disabled />
+          </div>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_earthing" disabled /> Earthing provided</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_panelsAccessible" disabled /> Electrical panels accessible</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_escapeRoutes" disabled /> Escape routes clear</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_fireDoors" disabled /> Fire doors installed</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_staircaseWidth" disabled /> Staircase width adequate</label>
+        </div>
+
+        <hr />
+        <h5 class="font-semibold">Housekeeping & Storage</h5>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_hazardousStorage" disabled /> No hazardous storage</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_corridors" disabled /> Corridors obstruction-free</label>
+          <label class="flex items-center gap-3"><input type="checkbox" id="view_wasteDisposal" disabled /> Waste disposal safe</label>
+        </div>
+
+        <hr />
+        <h5 class="font-semibold">Uploaded Documents</h5>
+        <div id="view_files" class="text-sm text-gray-700"></div>
+
+        <div class="mt-4 text-right">
+          <button type="button" id="closeModalBtn" class="px-4 py-2 bg-red-600 text-white rounded">Close</button>
+        </div>
+      </form>
     </div>
-
-    <!-- Read-only form that mirrors the submission form -->
-    <form id="detailForm" class="space-y-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-gray-600 text-sm">Building Name</label>
-          <input id="view_buildingName" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Building Type</label>
-          <input id="view_buildingType" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-gray-600 text-sm">Address</label>
-          <textarea id="view_address" rows="2" class="w-full px-3 py-2 border rounded" disabled></textarea>
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Number of Floors</label>
-          <input id="view_floors" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Occupancy Load</label>
-          <input id="view_occupancyLoad" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Year of Construction</label>
-          <input id="view_yearConstruction" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Owner/Applicant Name</label>
-          <input id="view_ownerName" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Contact Number</label>
-          <input id="view_contactNumber" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-      </div>
-
-      <hr />
-      <h5 class="font-semibold">Fire Protection Systems</h5>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_fireExtinguishers" disabled /> Fire extinguishers installed</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_hydrants" disabled /> Hydrants available</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_smokeDetectors" disabled /> Smoke detectors functional</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_sprinklers" disabled /> Sprinkler system installed</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_fireAlarm" disabled /> Fire alarm system operational</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_emergencyExits" disabled /> Emergency exits marked</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_firePump" disabled /> Fire pump working</label>
-      </div>
-
-      <hr />
-      <h5 class="font-semibold">Electrical & Structural</h5>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div>
-          <label class="block text-gray-600 text-sm">Wiring Condition</label>
-          <input id="view_wiringCondition" class="w-full px-3 py-2 border rounded" disabled />
-        </div>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_earthing" disabled /> Earthing provided</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_panelsAccessible" disabled /> Electrical panels accessible</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_escapeRoutes" disabled /> Escape routes clear</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_fireDoors" disabled /> Fire doors installed</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_staircaseWidth" disabled /> Staircase width adequate</label>
-      </div>
-
-      <hr />
-      <h5 class="font-semibold">Housekeeping & Storage</h5>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_hazardousStorage" disabled /> No hazardous storage</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_corridors" disabled /> Corridors obstruction-free</label>
-        <label class="flex items-center gap-3"><input type="checkbox" id="view_wasteDisposal" disabled /> Waste disposal safe</label>
-      </div>
-
-      <hr />
-      <h5 class="font-semibold">Uploaded Documents</h5>
-      <div id="view_files" class="text-sm text-gray-700"></div>
-
-      <div class="mt-4 text-right">
-        <button type="button" id="closeModalBtn" class="px-4 py-2 bg-red-600 text-white rounded">Close</button>
-      </div>
-    </form>
   </div>
-</div>
-
 
   <script>
     // API Configuration
@@ -603,7 +598,7 @@
           // Clear file name displays
           ['buildingPlanName','equipmentLayoutName','electricalLayoutName','previousAuditName','additionalDocsName'].forEach(id => document.getElementById(id).textContent = '');
 
-          // After successful submit, switch to My Applications and refresh the list so it's visible in backend
+          // Switch to My Applications tab
           tabMyApps.click();
         } else {
           alert(`✗ Error: ${result.message || 'Server returned an error'}`);
@@ -613,14 +608,14 @@
         submitBtn.innerHTML = originalText;
       } catch (error) {
         console.error('Error:', error);
-        alert(`✗ Error submitting form: ${error.message}\n\nMake sure the backend server is running on http://localhost:5000`);
+        alert(`✗ Error submitting form: ${error.message}\n\nMake sure the backend server is running on http://localhost:5001`);
         const submitBtn = document.querySelector('button[type="submit"]');
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fas fa-check"></i> Submit';
       }
     });
 
-    // Load applications from backend and populate table
+    // Load applications from backend
     async function loadApplications(query = '') {
       const tbody = document.getElementById('appsTableBody');
       const noAppsMsg = document.getElementById('noAppsMsg');
@@ -628,7 +623,6 @@
       noAppsMsg.classList.add('hidden');
 
       try {
-        // If your backend supports query params for filtering (e.g. ?q=...), include it. Otherwise GET returns all.
         const url = query ? `${API_URL}?q=${encodeURIComponent(query)}` : API_URL;
         const res = await fetch(url);
         const data = await res.json();
@@ -698,7 +692,7 @@
 
       } catch (err) {
         console.error('Failed to load applications', err);
-        noAppsMsg.textContent = 'Error loading applications. Check console for details.';
+        noAppsMsg.textContent = 'Error loading applications. Make sure backend is running.';
         noAppsMsg.classList.remove('hidden');
       }
     }
@@ -715,82 +709,68 @@
       }
     });
 
-    // Modal
+    // Modal functions
     const detailModal = document.getElementById('detailModal');
-    const detailContent = document.getElementById('detailContent');
     document.getElementById('closeModal').addEventListener('click', () => detailModal.classList.add('hidden'));
+    document.getElementById('closeModalBtn').addEventListener('click', () => detailModal.classList.add('hidden'));
 
     function showDetails(app) {
-  // Populate read-only view form
-  const setVal = (id, value) => {
-    const el = document.getElementById('view_' + id);
-    if (!el) return;
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
-      el.value = value !== undefined && value !== null ? value : '';
-    } else {
-      el.textContent = value !== undefined && value !== null ? value : '';
+      const setVal = (id, value) => {
+        const el = document.getElementById('view_' + id);
+        if (!el) return;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.value = value !== undefined && value !== null ? value : '';
+        } else {
+          el.textContent = value !== undefined && value !== null ? value : '';
+        }
+        el.disabled = true;
+      };
+
+      // Basic fields
+      setVal('buildingName', app.buildingName || app.building || '');
+      setVal('buildingType', app.buildingType || '');
+      setVal('address', app.address || '');
+      setVal('floors', app.floors || app.numberOfFloors || '');
+      setVal('occupancyLoad', app.occupancyLoad || '');
+      setVal('yearConstruction', app.yearConstruction || '');
+      setVal('ownerName', app.ownerName || '');
+      setVal('contactNumber', app.contactNumber || '');
+      setVal('wiringCondition', app.wiringCondition || '');
+
+      // Checkboxes
+      const boolFields = ['fireExtinguishers','hydrants','smokeDetectors','sprinklers','fireAlarm','emergencyExits','firePump','earthing','panelsAccessible','escapeRoutes','fireDoors','staircaseWidth','hazardousStorage','corridors','wasteDisposal'];
+      boolFields.forEach(field => {
+        const el = document.getElementById('view_' + field);
+        if (!el) return;
+        el.checked = !!(app[field] === true);
+        el.disabled = true;
+      });
+
+      // Files
+      const filesContainer = document.getElementById('view_files');
+      filesContainer.innerHTML = '';
+
+      const fileKeys = ['buildingPlan','equipmentLayout','electricalLayout','previousAudit','additionalDocs'];
+      fileKeys.forEach(key => {
+        const url = app[key + 'Url'] || (app.files && app.files[key]);
+        if (url) {
+          const a = document.createElement('a');
+          a.href = 'http://localhost:5001' + url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.className = 'block text-blue-600 underline mb-1';
+          a.textContent = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+          filesContainer.appendChild(a);
+        }
+      });
+
+      if (!filesContainer.childElementCount) {
+        filesContainer.textContent = 'No uploaded documents available.';
+      }
+
+      detailModal.classList.remove('hidden');
+      detailModal.classList.add('flex');
     }
-    el.disabled = true;
-  };
-
-  // Basic fields
-  setVal('buildingName', app.buildingName || app.building || '');
-  setVal('buildingType', app.buildingType || '');
-  setVal('address', app.address || '');
-  setVal('floors', app.floors || app.numberOfFloors || '');
-  setVal('occupancyLoad', app.occupancyLoad || '');
-  setVal('yearConstruction', app.yearConstruction || '');
-  setVal('ownerName', app.ownerName || '');
-  setVal('contactNumber', app.contactNumber || '');
-
-  // Wiring condition
-  setVal('wiringCondition', app.wiringCondition || '');
-
-  // Checkboxes (boolean fields)
-  const boolFields = ['fireExtinguishers','hydrants','smokeDetectors','sprinklers','fireAlarm','emergencyExits','firePump','earthing','panelsAccessible','escapeRoutes','fireDoors','staircaseWidth','hazardousStorage','corridors','wasteDisposal'];
-  boolFields.forEach(field => {
-    const el = document.getElementById('view_' + field);
-    if (!el) return;
-    el.checked = !!(app[field] || (app[field] === true));
-    el.disabled = true;
-  });
-
-  // Files — try a few common shapes the backend might return
-  const filesContainer = document.getElementById('view_files');
-  filesContainer.innerHTML = '';
-
-  const fileKeys = ['buildingPlan','equipmentLayout','electricalLayout','previousAudit','additionalDocs'];
-  fileKeys.forEach(key => {
-    // try common shapes: app[key + 'Url'], app.files && app.files[key], app[key], app[key + 'Link']
-    const url = (app[key + 'Url']) || (app.files && app.files[key]) || (app[key]) || (app[key + 'Link']);
-    if (url) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'block text-blue-600 underline mb-1';
-      a.textContent = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
-      filesContainer.appendChild(a);
-    }
-  });
-
-  // If there are no files, show a friendly message
-  if (!filesContainer.childElementCount) {
-    filesContainer.textContent = 'No uploaded documents available.';
-  }
-
-  // open modal
-  const detailModal = document.getElementById('detailModal');
-  detailModal.classList.remove('hidden');
-
-  // wire close buttons
-  document.getElementById('closeModal').onclick = () => detailModal.classList.add('hidden');
-  document.getElementById('closeModalBtn').onclick = () => detailModal.classList.add('hidden');
-}
-
-
-    // Initial behavior: keep on form view. If you want to auto-load applications for a logged-in user, call loadApplications() here and implement server-side filtering by user.
-    // loadApplications();
   </script>
 </body>
 </html>
