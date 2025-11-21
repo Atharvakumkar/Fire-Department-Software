@@ -20,7 +20,7 @@
         <p class="text-gray-600 mt-2">Fire NOC & Inspections Management</p>
       </div>
 
-      <form onsubmit="login(event)" class="space-y-4">
+      <form id="loginForm" class="space-y-4">
         <div>
           <label class="block text-gray-700 font-semibold mb-2">Username</label>
           <input type="text" id="username" required
@@ -41,7 +41,8 @@
         </button>
       </form>
 
-      <p class="text-sm text-gray-500 mt-4 text-center">Default: admin / admin123</p>
+      
+      <div id="loginError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm"></div>
     </div>
   </div>
 
@@ -49,7 +50,6 @@
   <div id="adminDashboard" class="hidden min-h-screen flex">
 
     <!-- Sidebar -->
-        <!-- Sidebar -->
     <aside class="w-[86px] bg-white min-h-screen flex flex-col items-center py-5 border-r-2 border-gray-200">
       
       <!-- Logo circle -->
@@ -61,49 +61,36 @@
 
       <!-- Nav items -->
       <nav class="flex flex-col gap-2 w-full">
-        <!-- Active item -->
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition bg-red-700">
-          <svg class="w-6 h-6 mb-1 fill-white" viewBox="0 0 24 24">
+        <a onclick="showSection('dashboard')" class="nav-item active flex flex-col items-center justify-center py-4 cursor-pointer transition">
+          <svg class="w-6 h-6 mb-1 fill-current" viewBox="0 0 24 24">
             <path d="M10 20V14H14V20H19V12H22L12 3L2 12H5V20H10Z"/>
           </svg>
-          <span class="text-[11px] font-medium text-white">Dashboard</span>
+          <span class="text-[11px] font-medium">Dashboard</span>
         </a>
 
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
-            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
-          </svg>
-          <span class="text-[11px] font-medium text-red-700">Inspections</span>
-        </a>
-
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-          <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24">
+        <a onclick="showSection('applications')" class="nav-item flex flex-col items-center justify-center py-4 cursor-pointer transition">
+          <svg class="w-6 h-6 mb-1 fill-current" viewBox="0 0 24 24">
             <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M10 19L12 15H9V10L7 14H10V19Z"/>
           </svg>
-          <span class="text-[11px] font-medium text-red-700">NOCs</span>
+          <span class="text-[11px] font-medium">NOCs</span>
         </a>
 
-        <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="infoIconTitle" xmlns="http://www.w3.org/2000/svg">
-    <title id="infoIconTitle">Info</title>
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-  </svg>
-  <span class="text-[11px] font-medium text-red-700">Tips</span>
-</a>
+        <a onclick="showSection('inspections')" class="nav-item flex flex-col items-center justify-center py-4 cursor-pointer transition">
+          <svg class="w-6 h-6 mb-1 fill-current" viewBox="0 0 24 24">
+            <path d="M9 11H7V13H9V11M13 11H11V13H13V11M17 11H15V13H17V11M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4M19 20H5V9H19V20Z"/>
+          </svg>
+          <span class="text-[11px] font-medium">Inspections</span>
+        </a>
 
-
-    <a href="#" class="flex flex-col items-center justify-center py-4 cursor-pointer transition hover:bg-gray-100">
-  <svg class="w-6 h-6 mb-1 fill-red-700" viewBox="0 0 24 24" role="img" aria-labelledby="emergencyPhoneTitle" xmlns="http://www.w3.org/2000/svg">
-    <title id="emergencyPhoneTitle">Emergency Contacts</title>
-    <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V21c0 .55-.45 1-1 1C10.07 22 2 13.93 2 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/>
-  </svg>
-  <span class="text-[11px] font-medium text-red-700">Emergency</span>
-</a>
-
-
-
+        <a onclick="logout()" class="nav-item flex flex-col items-center justify-center py-4 cursor-pointer transition mt-auto">
+          <svg class="w-6 h-6 mb-1 fill-current" viewBox="0 0 24 24">
+            <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"/>
+          </svg>
+          <span class="text-[11px] font-medium">Logout</span>
+        </a>
       </nav>
     </aside>
+
     <!-- Main Content -->
     <div class="flex-1 p-8 overflow-auto">
 
@@ -111,16 +98,17 @@
       <div id="dashboardSection" class="section">
         <div class="mb-8">
           <h2 class="text-3xl font-bold text-red-600 mb-2">Dashboard</h2>
-          <p class="text-gray-600">Overview of all NOC & Inspection applications</p>
+          <p class="text-gray-600">Overview of all NOC applications and inspections</p>
         </div>
 
-        <!-- Statistics Cards -->
+        <!-- NOC Statistics Cards -->
+        <h3 class="text-xl font-bold text-gray-800 mb-4">NOC Applications Statistics</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-600 text-sm font-semibold">Total NOC Apps</p>
-                <p class="text-3xl font-bold text-blue-600" id="totalCount">0</p>
+                <p class="text-gray-600 text-sm font-semibold">Total NOCs</p>
+                <p class="text-3xl font-bold text-blue-600" id="totalNOCCount">0</p>
               </div>
               <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-file-alt text-blue-600 text-xl"></i>
@@ -131,8 +119,8 @@
           <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-600 text-sm font-semibold">Pending NOC</p>
-                <p class="text-3xl font-bold text-yellow-600" id="submittedCount">0</p>
+                <p class="text-gray-600 text-sm font-semibold">Pending NOCs</p>
+                <p class="text-3xl font-bold text-yellow-600" id="pendingNOCCount">0</p>
               </div>
               <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-clock text-yellow-600 text-xl"></i>
@@ -143,8 +131,8 @@
           <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-600 text-sm font-semibold">Approved NOC</p>
-                <p class="text-3xl font-bold text-green-600" id="approvedCount">0</p>
+                <p class="text-gray-600 text-sm font-semibold">Approved NOCs</p>
+                <p class="text-3xl font-bold text-green-600" id="approvedNOCCount">0</p>
               </div>
               <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-check-circle text-green-600 text-xl"></i>
@@ -155,8 +143,8 @@
           <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-gray-600 text-sm font-semibold">Rejected NOC</p>
-                <p class="text-3xl font-bold text-red-600" id="rejectedCount">0</p>
+                <p class="text-gray-600 text-sm font-semibold">Rejected NOCs</p>
+                <p class="text-3xl font-bold text-red-600" id="rejectedNOCCount">0</p>
               </div>
               <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-times-circle text-red-600 text-xl"></i>
@@ -165,18 +153,70 @@
           </div>
         </div>
 
+        <!-- Inspection Statistics Cards -->
+        <h3 class="text-xl font-bold text-gray-800 mb-4 mt-8">Inspection Statistics</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm font-semibold">Total Inspections</p>
+                <p class="text-3xl font-bold text-blue-600" id="totalInspCount">0</p>
+              </div>
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-clipboard-check text-blue-600 text-xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm font-semibold">Pending Inspections</p>
+                <p class="text-3xl font-bold text-yellow-600" id="pendingInspCount">0</p>
+              </div>
+              <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-hourglass-half text-yellow-600 text-xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm font-semibold">Approved Inspections</p>
+                <p class="text-3xl font-bold text-green-600" id="approvedInspCount">0</p>
+              </div>
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-check-double text-green-600 text-xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm font-semibold">Rejected Inspections</p>
+                <p class="text-3xl font-bold text-red-600" id="rejectedInspCount">0</p>
+              </div>
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-ban text-red-600 text-xl"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Recent Applications + Recent Inspections -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Recent Applications</h3>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Recent NOC Applications</h3>
             <div class="overflow-x-auto">
               <table class="w-full">
                 <thead>
                   <tr class="border-b-2 border-gray-200">
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">App No</th>
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">Property</th>
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Applicant</th>
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
                   </tr>
                 </thead>
                 <tbody id="recentApplicationsTable">
@@ -196,8 +236,8 @@
                   <tr class="border-b-2 border-gray-200">
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">ID</th>
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">Building</th>
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Owner</th>
                     <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
                   </tr>
                 </thead>
                 <tbody id="recentInspectionsTable">
@@ -211,10 +251,10 @@
         </div>
       </div>
 
-      <!-- Applications Section -->
+      <!-- NOC Applications Section -->
       <div id="applicationsSection" class="section hidden">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold text-red-600 mb-2">All Applications</h2>
+          <h2 class="text-3xl font-bold text-red-600 mb-2">NOC Applications</h2>
           <p class="text-gray-600">Manage and review NOC applications</p>
         </div>
 
@@ -226,7 +266,7 @@
               <select id="statusFilter" onchange="filterApplications()"
                       class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
                 <option value="all">All Applications</option>
-                <option value="Submitted">Submitted</option>
+                <option value="Pending">Pending</option>
                 <option value="Under Review">Under Review</option>
                 <option value="Approved">Approved</option>
                 <option value="Rejected">Rejected</option>
@@ -276,10 +316,10 @@
       <div id="inspectionsSection" class="section hidden">
         <div class="mb-8">
           <h2 class="text-3xl font-bold text-red-600 mb-2">Inspections</h2>
-          <p class="text-gray-600">Manage and review inspection submissions</p>
+          <p class="text-gray-600">Manage and review fire safety inspections</p>
         </div>
 
-        <!-- Inspection Filters -->
+        <!-- Filters -->
         <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -318,7 +358,7 @@
                   <th class="text-left py-3 px-4 font-semibold text-gray-700">Building</th>
                   <th class="text-left py-3 px-4 font-semibold text-gray-700">Owner</th>
                   <th class="text-left py-3 px-4 font-semibold text-gray-700">Floors</th>
-                  <th class="text-left py-3 px-4 font-semibold text-gray-700">Submitted</th>
+                  <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
                   <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
                   <th class="text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
                 </tr>
@@ -336,7 +376,7 @@
     </div>
   </div>
 
-  <!-- Application Detail Modal -->
+  <!-- NOC Detail Modal -->
   <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
     <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto m-4">
       <div class="sticky top-0 bg-red-600 text-white p-6 flex justify-between items-center">
@@ -345,13 +385,12 @@
           <i class="fas fa-times text-2xl"></i>
         </button>
       </div>
-
       <div id="modalContent" class="p-6"></div>
     </div>
   </div>
 
   <!-- Inspection Detail Modal -->
-  <div id="inspectionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-60">
+  <div id="inspectionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
     <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto m-4">
       <div class="sticky top-0 bg-red-600 text-white p-6 flex justify-between items-center">
         <h3 class="text-2xl font-bold">Inspection Details</h3>
@@ -359,7 +398,6 @@
           <i class="fas fa-times text-2xl"></i>
         </button>
       </div>
-
       <div id="inspectionModalContent" class="p-6"></div>
     </div>
   </div>
@@ -371,67 +409,59 @@
   </style>
 
   <script>
-    // API roots (update if your servers run on different hosts/ports)
-    const API_URL = 'http://localhost:5000/api';                 // NOC endpoints
-    const INSP_API = 'http://localhost:5001/api/safety-reviews'; // Inspections endpoints
-
+    const NOC_API = 'http://localhost:5000/api';
+    const INSP_API = 'http://localhost:5001/api';
+    
     let allApplications = [];
     let allInspections = [];
     let currentAdmin = null;
 
-    // ----------------- Helpers -----------------
+    // Status color mapping
     function statusToClass(status) {
-      if (!status) return 'bg-yellow-600';
-      if (status === 'Approved') return 'bg-green-600';
-      if (status === 'Rejected') return 'bg-red-600';
-      return 'bg-yellow-600';
+      const map = {
+        'Pending': 'bg-yellow-500',
+        'Submitted': 'bg-yellow-500',
+        'Under Review': 'bg-blue-500',
+        'Approved': 'bg-green-500',
+        'Rejected': 'bg-red-500'
+      };
+      return map[status] || 'bg-yellow-500';
     }
 
-    // Attempt fetch with fallback: first try primaryMethod, if 404 try fallbackMethod
-    async function fetchWithMethodFallback(url, primaryMethod, fallbackMethod, options = {}) {
-      // primary attempt
+    // Test backend connections
+    async function testConnections() {
       try {
-        const resPrimary = await fetch(url, { method: primaryMethod, ...options });
-        if (resPrimary.status === 404 && fallbackMethod) {
-          console.warn(`${primaryMethod} returned 404 for ${url}, trying ${fallbackMethod}`);
-          const resFallback = await fetch(url, { method: fallbackMethod, ...options });
-          return resFallback;
-        }
-        return resPrimary;
+        const nocRes = await fetch(`${NOC_API}/health`);
+        console.log(nocRes.ok ? '✅ NOC API connected' : '❌ NOC API not responding');
       } catch (err) {
-        // network errors etc.
-        throw err;
+        console.error('❌ NOC API not connected:', err);
+      }
+
+      try {
+        const inspRes = await fetch(`${INSP_API}/health`);
+        console.log(inspRes.ok ? '✅ Inspection API connected' : '❌ Inspection API not responding');
+      } catch (err) {
+        console.error('❌ Inspection API not connected:', err);
       }
     }
 
-    // ----------------- Authentication -----------------
-    async function login(event) {
-      event.preventDefault();
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
 
-      try {
-        const response = await fetch(`${API_URL}/admin/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-          currentAdmin = result.data;
-          document.getElementById('adminUsername').textContent = result.data.username;
-          document.getElementById('loginPage').classList.add('hidden');
-          document.getElementById('adminDashboard').classList.remove('hidden');
-          await loadDashboard();
-        } else {
-          alert('Invalid credentials. Please try again.');
-        }
-      } catch (err) {
-        console.error('Login error:', err);
-        alert('Login failed. Make sure the server is running and CORS allows requests from this origin.');
+      if (username === 'admin' && password === 'admin123') {
+        currentAdmin = { username: 'admin' };
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        await loadDashboard();
+      } else {
+        errorDiv.textContent = 'Invalid username or password';
+        errorDiv.classList.remove('hidden');
       }
-    }
+    });
 
     function logout() {
       currentAdmin = null;
@@ -439,36 +469,60 @@
       document.getElementById('adminDashboard').classList.add('hidden');
       document.getElementById('username').value = '';
       document.getElementById('password').value = '';
+      document.getElementById('loginError').classList.add('hidden');
     }
 
-    // ----------------- Dashboard (load both NOC & Inspections) -----------------
+    // Load dashboard data
     async function loadDashboard() {
-      await loadStatistics();
+      await testConnections();
+      await loadNOCStatistics();
+      await loadInspectionStatistics();
       await loadRecentApplications();
-      await loadAllApplications();
-      await loadInspectionStats();
       await loadRecentInspections();
+      await loadAllApplications();
       await loadAllInspections();
     }
 
-    // NOC statistics
-    async function loadStatistics() {
+    // Load NOC statistics
+    async function loadNOCStatistics() {
       try {
-        const res = await fetch(`${API_URL}/admin/stats`);
+        const res = await fetch(`${NOC_API}/applications`);
         const result = await res.json();
+        
         if (res.ok && result.success) {
-          document.getElementById('totalCount').textContent = result.data.total ?? 0;
-          document.getElementById('submittedCount').textContent = result.data.submitted ?? 0;
-          document.getElementById('approvedCount').textContent = result.data.approved ?? 0;
-          document.getElementById('rejectedCount').textContent = result.data.rejected ?? 0;
+          const apps = result.data;
+          document.getElementById('totalNOCCount').textContent = apps.length;
+          document.getElementById('pendingNOCCount').textContent = apps.filter(a => a.status === 'Pending' || a.status === 'Submitted').length;
+          document.getElementById('approvedNOCCount').textContent = apps.filter(a => a.status === 'Approved').length;
+          document.getElementById('rejectedNOCCount').textContent = apps.filter(a => a.status === 'Rejected').length;
         }
-      } catch (err) { console.error('Error loading NOC stats:', err); }
+      } catch (err) {
+        console.error('Error loading NOC statistics:', err);
+      }
     }
 
-    // NOC recent apps
+    // Load Inspection statistics
+    async function loadInspectionStatistics() {
+      try {
+        const res = await fetch(`${INSP_API}/inspections`);
+        const result = await res.json();
+        
+        if (res.ok && result.success) {
+          const insp = result.data;
+          document.getElementById('totalInspCount').textContent = insp.length;
+          document.getElementById('pendingInspCount').textContent = insp.filter(i => i.status === 'Pending' || i.status === 'Submitted').length;
+          document.getElementById('approvedInspCount').textContent = insp.filter(i => i.status === 'Approved').length;
+          document.getElementById('rejectedInspCount').textContent = insp.filter(i => i.status === 'Rejected').length;
+        }
+      } catch (err) {
+        console.error('Error loading Inspection statistics:', err);
+      }
+    }
+
+    // Load recent NOC applications
     async function loadRecentApplications() {
       try {
-        const res = await fetch(`${API_URL}/applications`);
+        const res = await fetch(`${NOC_API}/applications`);
         const result = await res.json();
         const tbody = document.getElementById('recentApplicationsTable');
 
@@ -478,57 +532,97 @@
             <tr class="border-b border-gray-200 hover:bg-gray-50">
               <td class="py-3 px-4 font-semibold text-red-600">${app.appNo}</td>
               <td class="py-3 px-4">${app.propertyName || '—'}</td>
-              <td class="py-3 px-4">${app.applicantName || '—'}</td>
-              <td class="py-3 px-4">${app.submittedDate ? new Date(app.submittedDate).toLocaleDateString() : '—'}</td>
+              <td class="py-3 px-4">${new Date(app.submittedDate).toLocaleDateString()}</td>
+              <td class="py-3 px-4">
+                <span class="px-2 py-1 rounded-full text-xs font-semibold text-white ${statusToClass(app.status)}">
+                  ${app.status}
+                </span>
+              </td>
             </tr>
           `).join('');
         } else {
           tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">No applications found</td></tr>';
         }
-      } catch (err) { console.error('Error loading recent applications:', err); }
+      } catch (err) {
+        console.error('Error loading recent applications:', err);
+        document.getElementById('recentApplicationsTable').innerHTML = '<tr><td colspan="4" class="text-center py-8 text-red-500">Error loading data</td></tr>';
+      }
     }
 
-    // NOC - load all applications
+    // Load recent inspections
+    async function loadRecentInspections() {
+      try {
+        const res = await fetch(`${INSP_API}/inspections`);
+        const result = await res.json();
+        const tbody = document.getElementById('recentInspectionsTable');
+
+        if (res.ok && result.success && result.data.length) {
+          const recent = result.data.slice(0, 5);
+          tbody.innerHTML = recent.map(insp => `
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="py-3 px-4 font-semibold text-red-600">${insp.inspectionId || insp._id || '—'}</td>
+              <td class="py-3 px-4">${insp.buildingName || '—'}</td>
+              <td class="py-3 px-4">${insp.submittedDate ? new Date(insp.submittedDate).toLocaleDateString() : '—'}</td>
+              <td class="py-3 px-4">
+                <span class="px-2 py-1 rounded-full text-xs font-semibold text-white ${statusToClass(insp.status)}">
+                  ${insp.status || 'Pending'}
+                </span>
+              </td>
+            </tr>
+          `).join('');
+        } else {
+          tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">No inspections found</td></tr>';
+        }
+      } catch (err) {
+        console.error('Error loading recent inspections:', err);
+        document.getElementById('recentInspectionsTable').innerHTML = '<tr><td colspan="4" class="text-center py-8 text-red-500">Error loading data</td></tr>';
+      }
+    }
+
+    // Load all NOC applications
     async function loadAllApplications() {
       try {
-        const res = await fetch(`${API_URL}/applications`);
+        const res = await fetch(`${NOC_API}/applications`);
         const result = await res.json();
+        
         if (res.ok && result.success) {
-          allApplications = result.data.map(a => ({ ...a, statusClass: a.statusClass || statusToClass(a.status) }));
+          allApplications = result.data;
           displayApplications(allApplications);
-        } else {
-          allApplications = [];
-          displayApplications([]);
         }
-      } catch (err) { console.error('Error loading all applications:', err); displayApplications([]); }
+      } catch (err) {
+        console.error('Error loading applications:', err);
+        displayApplications([]);
+      }
     }
 
     function displayApplications(apps) {
       const tbody = document.getElementById('applicationsTable');
+      
       if (!apps || apps.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-gray-500">No applications found</td></tr>';
         return;
       }
+
       tbody.innerHTML = apps.map(app => `
         <tr class="border-b border-gray-200 hover:bg-gray-50">
           <td class="py-3 px-4 font-semibold text-red-600">${app.appNo}</td>
           <td class="py-3 px-4">${app.propertyName || '—'}</td>
           <td class="py-3 px-4">${app.applicantName || '—'}</td>
           <td class="py-3 px-4">${app.buildingType || '—'}</td>
-          <td class="py-3 px-4">${app.submittedDate ? new Date(app.submittedDate).toLocaleDateString() : '—'}</td>
+          <td class="py-3 px-4">${new Date(app.submittedDate).toLocaleDateString()}</td>
           <td class="py-3 px-4">
-            <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass || statusToClass(app.status)}">
-              ${app.status || 'Submitted'}
+            <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${statusToClass(app.status)}">
+              ${app.status}
             </span>
           </td>
           <td class="py-3 px-4">
-            <button onclick="viewApplication('${app.appNo}')" class="text-blue-600 hover:text-blue-700 mr-2">
+            <button onclick="viewApplication('${app.appNo}')" class="text-blue-600 hover:text-blue-700 mr-2" title="View">
               <i class="fas fa-eye"></i>
             </button>
-            <button onclick="showUpdateModal('${app.appNo}')" class="text-green-600 hover:text-green-700 mr-2">
+            <button onclick="showUpdateModal('${app.appNo}')" class="text-green-600 hover:text-green-700 mr-2" title="Update">
               <i class="fas fa-edit"></i>
             </button>
-            <button onclick="deleteApplication('${app.appNo}')" class="text-red-600 hover:text-red-700">
+            <button onclick="deleteApplication('${app.appNo}')" class="text-red-600 hover:text-red-700" title="Delete">
               <i class="fas fa-trash"></i>
             </button>
           </td>
@@ -536,40 +630,117 @@
       `).join('');
     }
 
-    // NOC - filtering
-    async function filterApplications() {
+    // Filter NOC applications
+    function filterApplications() {
       const status = document.getElementById('statusFilter').value;
-      const search = document.getElementById('searchInput').value;
-      try {
-        const params = new URLSearchParams();
-        if (status !== 'all') params.append('status', status);
-        if (search) params.append('search', search);
-        const res = await fetch(`${API_URL}/applications?${params}`);
-        const result = await res.json();
-        if (res.ok && result.success) {
-          const apps = result.data.map(a => ({ ...a, statusClass: a.statusClass || statusToClass(a.status) }));
-          displayApplications(apps);
-        } else {
-          displayApplications([]);
-        }
-      } catch (err) { console.error('Error filtering applications:', err); displayApplications([]); }
+      const search = document.getElementById('searchInput').value.toLowerCase();
+
+      let filtered = allApplications;
+
+      if (status !== 'all') {
+        filtered = filtered.filter(app => app.status === status);
+      }
+
+      if (search) {
+        filtered = filtered.filter(app => 
+          app.appNo.toLowerCase().includes(search) ||
+          (app.propertyName && app.propertyName.toLowerCase().includes(search)) ||
+          (app.applicantName && app.applicantName.toLowerCase().includes(search))
+        );
+      }
+
+      displayApplications(filtered);
     }
 
-    // View a single application
+    // Load all inspections
+    async function loadAllInspections() {
+      try {
+        const res = await fetch(`${INSP_API}/inspections`);
+        const result = await res.json();
+        
+        if (res.ok && result.success) {
+          allInspections = result.data;
+          displayInspections(allInspections);
+        }
+      } catch (err) {
+        console.error('Error loading inspections:', err);
+        displayInspections([]);
+      }
+    }
+
+    function displayInspections(inspections) {
+      const tbody = document.getElementById('inspectionsTable');
+      
+      if (!inspections || inspections.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-gray-500">No inspections found</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = inspections.map(insp => `
+        <tr class="border-b border-gray-200 hover:bg-gray-50">
+          <td class="py-3 px-4 font-semibold text-red-600">${insp.inspectionId || insp._id || '—'}</td>
+          <td class="py-3 px-4">${insp.buildingName || '—'}</td>
+          <td class="py-3 px-4">${insp.ownerName || '—'}</td>
+          <td class="py-3 px-4">${insp.floors || insp.numberOfFloors || '—'}</td>
+          <td class="py-3 px-4">${insp.submittedDate ? new Date(insp.submittedDate).toLocaleDateString() : '—'}</td>
+          <td class="py-3 px-4">
+            <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${statusToClass(insp.status)}">
+              ${insp.status || 'Pending'}
+            </span>
+          </td>
+          <td class="py-3 px-4">
+            <button onclick="viewInspection('${insp.inspectionId || insp._id}')" class="text-blue-600 hover:text-blue-700 mr-2" title="View">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button onclick="showInspectionUpdateModal('${insp.inspectionId || insp._id}')" class="text-green-600 hover:text-green-700 mr-2" title="Update">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteInspection('${insp.inspectionId || insp._id}')" class="text-red-600 hover:text-red-700" title="Delete">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Filter inspections
+    function filterInspections() {
+      const status = document.getElementById('inspStatusFilter').value;
+      const search = document.getElementById('inspSearchInput').value.toLowerCase();
+
+      let filtered = allInspections;
+
+      if (status !== 'all') {
+        filtered = filtered.filter(insp => insp.status === status);
+      }
+
+      if (search) {
+        filtered = filtered.filter(insp => 
+          (insp.inspectionId && insp.inspectionId.toLowerCase().includes(search)) ||
+          (insp.buildingName && insp.buildingName.toLowerCase().includes(search)) ||
+          (insp.ownerName && insp.ownerName.toLowerCase().includes(search))
+        );
+      }
+
+      displayInspections(filtered);
+    }
+
+    // View NOC application details
     async function viewApplication(appNo) {
       try {
-        const response = await fetch(`${API_URL}/applications/${encodeURIComponent(appNo)}`);
-        const result = await response.json();
-        if (response.ok && result.success) {
+        const res = await fetch(`${NOC_API}/applications/${appNo}`);
+        const result = await res.json();
+        
+        if (res.ok && result.success) {
           const app = result.data;
           document.getElementById('modalContent').innerHTML = generateApplicationDetailHtml(app);
           document.getElementById('detailModal').classList.remove('hidden');
         } else {
-          alert('Unable to load application details: ' + (result.message || response.status));
+          alert('Error loading application details');
         }
-      } catch (error) {
-        console.error('Error viewing application:', error);
-        alert('Error loading application details. Check console for more info.');
+      } catch (err) {
+        console.error('Error viewing application:', err);
+        alert('Error loading application details');
       }
     }
 
@@ -583,8 +754,8 @@
             </div>
             <div>
               <p class="text-sm text-gray-600 font-semibold">Status</p>
-              <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white ${app.statusClass || statusToClass(app.status)}">
-                ${app.status || 'Submitted'}
+              <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white ${statusToClass(app.status)}">
+                ${app.status}
               </span>
             </div>
           </div>
@@ -592,52 +763,22 @@
           <div class="border-t pt-4">
             <h4 class="text-lg font-bold text-gray-800 mb-3">Property Details</h4>
             <div class="grid grid-cols-2 gap-4">
-              <div>
-                <p class="text-sm text-gray-600">Property Name</p>
-                <p class="font-semibold">${app.propertyName || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Building Type</p>
-                <p class="font-semibold">${app.buildingType || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Plot Number</p>
-                <p class="font-semibold">${app.plotNumber || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Built-up Area</p>
-                <p class="font-semibold">${app.builtupArea || '—'} sq.ft</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Number of Floors</p>
-                <p class="font-semibold">${app.floors || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Address</p>
-                <p class="font-semibold">${app.address || '—'}</p>
-              </div>
+              <div><p class="text-sm text-gray-600">Property Name</p><p class="font-semibold">${app.propertyName || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Building Type</p><p class="font-semibold">${app.buildingType || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Plot Number</p><p class="font-semibold">${app.plotNumber || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Built-up Area</p><p class="font-semibold">${app.builtupArea || '—'} sq.ft</p></div>
+              <div><p class="text-sm text-gray-600">Number of Floors</p><p class="font-semibold">${app.floors || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Address</p><p class="font-semibold">${app.address || '—'}</p></div>
             </div>
           </div>
 
           <div class="border-t pt-4">
             <h4 class="text-lg font-bold text-gray-800 mb-3">Applicant Details</h4>
             <div class="grid grid-cols-2 gap-4">
-              <div>
-                <p class="text-sm text-gray-600">Name</p>
-                <p class="font-semibold">${app.applicantName || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Type</p>
-                <p class="font-semibold">${app.applicantType || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Mobile</p>
-                <p class="font-semibold">${app.mobile || '—'}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-600">Email</p>
-                <p class="font-semibold">${app.email || '—'}</p>
-              </div>
+              <div><p class="text-sm text-gray-600">Name</p><p class="font-semibold">${app.applicantName || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Type</p><p class="font-semibold">${app.applicantType || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Mobile</p><p class="font-semibold">${app.mobile || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Email</p><p class="font-semibold">${app.email || '—'}</p></div>
             </div>
           </div>
 
@@ -659,14 +800,17 @@
       `;
     }
 
+    // Show NOC update modal
     function showUpdateModal(appNo) {
-      const app = allApplications.find(a => a.appNo === appNo) || {};
+      const app = allApplications.find(a => a.appNo === appNo);
+      if (!app) return;
+
       document.getElementById('modalContent').innerHTML = `
-        <form onsubmit="updateStatus(event, '${appNo}')" class="space-y-4">
+        <form id="updateForm" class="space-y-4">
           <div>
             <label class="block text-gray-700 font-semibold mb-2">Update Status</label>
             <select id="newStatus" required class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
-              <option value="Submitted" ${app.status === 'Submitted' ? 'selected' : ''}>Submitted</option>
+              <option value="Pending" ${app.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Under Review" ${app.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
               <option value="Approved" ${app.status === 'Approved' ? 'selected' : ''}>Approved</option>
               <option value="Rejected" ${app.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
@@ -688,64 +832,60 @@
           </div>
         </form>
       `;
+      
+      document.getElementById('updateForm').addEventListener('submit', (e) => updateNOCStatus(e, appNo));
       document.getElementById('detailModal').classList.remove('hidden');
     }
 
-    // Update status for NOC application (tries PATCH then PUT if 404)
-    async function updateStatus(event, appNo) {
+    // Update NOC status
+    async function updateNOCStatus(event, appNo) {
       event.preventDefault();
-      const newStatus = document.getElementById('newStatus') ? document.getElementById('newStatus').value : null;
-      const remarks = document.getElementById('remarks') ? document.getElementById('remarks').value : '';
-
-      if (!newStatus) {
-        alert('Please select a status');
-        return;
-      }
-
-      const payload = { status: newStatus, remarks, updatedBy: currentAdmin ? currentAdmin.username : 'admin' };
-      const url = `${API_URL}/applications/${encodeURIComponent(appNo)}/status`;
+      
+      const newStatus = document.getElementById('newStatus').value;
+      const remarks = document.getElementById('remarks').value;
 
       try {
-        const res = await fetchWithMethodFallback(url, 'PATCH', 'PUT', {
+        const res = await fetch(`${NOC_API}/applications/${appNo}/status`, {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            status: newStatus,
+            remarks: remarks,
+            updatedBy: currentAdmin ? currentAdmin.username : 'admin'
+          })
         });
 
-        let result;
-        try { result = await res.json(); } catch (e) { result = null; }
+        const result = await res.json();
 
-        if (res.ok && result && result.success) {
-          alert('Application status updated');
-          // update in-memory list
-          const idx = allApplications.findIndex(a => a.appNo === appNo);
-          if (idx !== -1) {
-            allApplications[idx].status = newStatus;
-            allApplications[idx].statusClass = statusToClass(newStatus);
-            displayApplications(allApplications);
-          } else {
-            await loadDashboard();
-          }
+        if (res.ok && result.success) {
+          alert('Application status updated successfully!');
           closeModal();
+          await loadDashboard();
         } else {
-          console.error('updateStatus failed', res.status, result);
-          alert('Error updating application: ' + (result?.message || res.status));
+          alert('Error updating status: ' + (result.message || 'Unknown error'));
         }
       } catch (err) {
-        console.error('updateStatus error', err);
-        alert('Failed to update application. Check console and server logs.');
+        console.error('Error updating status:', err);
+        alert('Error updating status. Please make sure the backend is running.');
       }
     }
 
+    // Delete NOC application
     async function deleteApplication(appNo) {
       if (!confirm(`Are you sure you want to delete application ${appNo}?`)) return;
+
       try {
-        const response = await fetch(`${API_URL}/applications/${encodeURIComponent(appNo)}`, { method: 'DELETE' });
-        const result = await response.json();
-        if (response.ok && result.success) {
+        const res = await fetch(`${NOC_API}/applications/${appNo}`, {
+          method: 'DELETE'
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
           alert('Application deleted successfully!');
           await loadDashboard();
         } else {
-          alert('Error deleting application: ' + (result.message || response.status));
+          alert('Error deleting application: ' + (result.message || 'Unknown error'));
         }
       } catch (err) {
         console.error('Error deleting application:', err);
@@ -753,227 +893,79 @@
       }
     }
 
-    function closeModal() {
-      document.getElementById('detailModal').classList.add('hidden');
-    }
-
-    // ----------------- Inspections admin functions -----------------
-    async function loadInspectionStats() {
-      try {
-        const res = await fetch(`${INSP_API}`);
-        const result = await res.json();
-        if (res.ok && result && result.success) {
-          const arr = result.data || [];
-          console.log('Inspection stats', {
-            total: arr.length,
-            pending: arr.filter(i => i.status === 'Pending' || i.status === 'Submitted').length,
-            approved: arr.filter(i => i.status === 'Approved').length,
-            rejected: arr.filter(i => i.status === 'Rejected').length
-          });
-        }
-      } catch (err) { console.error('Error loading inspection stats:', err); }
-    }
-
-    // Recent inspections for dashboard card
-    async function loadRecentInspections() {
-      try {
-        const res = await fetch(`${INSP_API}`);
-        const result = await res.json();
-        const tbody = document.getElementById('recentInspectionsTable');
-        if (res.ok && result.success && result.data.length) {
-          const recent = result.data.slice(0, 5);
-          tbody.innerHTML = recent.map(item => `
-            <tr class="border-b border-gray-200 hover:bg-gray-50">
-              <td class="py-3 px-4 font-semibold text-red-600">${item.reviewId || item._id || '—'}</td>
-              <td class="py-3 px-4">${item.buildingName || '—'}</td>
-              <td class="py-3 px-4">${item.ownerName || '—'}</td>
-              <td class="py-3 px-4">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : '—'}</td>
-            </tr>
-          `).join('');
-        } else {
-          tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">No inspections found</td></tr>';
-        }
-      } catch (err) { console.error('Error loading recent inspections:', err); }
-    }
-
-    // Load all inspections
-    async function loadAllInspections() {
-      try {
-        const res = await fetch(`${INSP_API}`);
-        const result = await res.json();
-        if (res.ok && result.success) {
-          allInspections = result.data.map(i => ({ ...i, statusClass: i.statusClass || statusToClass(i.status) }));
-          displayInspections(allInspections);
-        } else {
-          allInspections = [];
-          displayInspections([]);
-        }
-      } catch (err) { console.error('Error loading inspections:', err); displayInspections([]); }
-    }
-
-    function displayInspections(list) {
-      const tbody = document.getElementById('inspectionsTable');
-      if (!list || list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-gray-500">No inspections found</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = list.map(item => `
-        <tr class="border-b border-gray-200 hover:bg-gray-50">
-          <td class="py-3 px-4 font-semibold text-red-600">${item.reviewId || item._id || '—'}</td>
-          <td class="py-3 px-4">${item.buildingName || '—'}</td>
-          <td class="py-3 px-4">${item.ownerName || '—'}</td>
-          <td class="py-3 px-4">${item.floors || item.numberOfFloors || '—'}</td>
-          <td class="py-3 px-4">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : '—'}</td>
-          <td class="py-3 px-4">
-            <span class="px-3 py-1 rounded-full text-sm font-semibold text-white ${item.statusClass || statusToClass(item.status)}">
-              ${item.status || 'Pending'}
-            </span>
-          </td>
-          <td class="py-3 px-4">
-            <button onclick="viewInspection('${encodeURIComponent(item.reviewId || item._id)}')" class="text-blue-600 hover:text-blue-700 mr-2">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button onclick="showInspectionUpdateModal('${encodeURIComponent(item.reviewId || item._id)}')" class="text-green-600 hover:text-green-700 mr-2">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button onclick="deleteInspection('${encodeURIComponent(item.reviewId || item._id)}')" class="text-red-600 hover:text-red-700">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    // filter inspections via backend query params if available
-    async function filterInspections() {
-      const status = document.getElementById('inspStatusFilter').value;
-      const search = document.getElementById('inspSearchInput').value;
-      try {
-        const params = new URLSearchParams();
-        if (status !== 'all') params.append('status', status);
-        if (search) params.append('q', search);
-        const res = await fetch(`${INSP_API}?${params}`);
-        const result = await res.json();
-        if (res.ok && result.success) {
-          const list = result.data.map(i => ({ ...i, statusClass: i.statusClass || statusToClass(i.status) }));
-          displayInspections(list);
-        } else {
-          displayInspections([]);
-        }
-      } catch (err) { console.error('Error filtering inspections:', err); displayInspections([]); }
-    }
-
-    // View single inspection - opens read-only modal
+    // View inspection details
     async function viewInspection(id) {
-      if (!id) return;
       try {
-        const decodedId = decodeURIComponent(id);
-        const res = await fetch(`${INSP_API}/${encodeURIComponent(decodedId)}`);
+        const res = await fetch(`${INSP_API}/inspections/${id}`);
         const result = await res.json();
-        if (!res.ok || !result.success) { alert('Unable to load inspection: ' + (result?.message || res.status)); return; }
-        const app = result.data;
-        const html = generateInspectionReadOnlyHtml(app);
-        document.getElementById('inspectionModalContent').innerHTML = html;
-        document.getElementById('inspectionModal').classList.remove('hidden');
+        
+        if (res.ok && result.success) {
+          const insp = result.data;
+          document.getElementById('inspectionModalContent').innerHTML = generateInspectionDetailHtml(insp);
+          document.getElementById('inspectionModal').classList.remove('hidden');
+        } else {
+          alert('Error loading inspection details');
+        }
       } catch (err) {
-        console.error('Error loading inspection:', err);
-        alert('Error loading inspection details. Check console for details.');
+        console.error('Error viewing inspection:', err);
+        alert('Error loading inspection details');
       }
     }
 
-    function generateInspectionReadOnlyHtml(app) {
+    function generateInspectionDetailHtml(insp) {
       const bool = v => (v ? 'Yes' : 'No');
-      const filesHtml = [];
-      const fileKeys = ['buildingPlan','equipmentLayout','electricalLayout','previousAudit','additionalDocs'];
-      fileKeys.forEach(k => {
-        const url = app[k + 'Url'] || (app.files && app.files[k]) || app[k] || app[k + 'Link'];
-        if (url) filesHtml.push(`<a class="block text-blue-600 underline mb-1" href="${url}" target="_blank" rel="noopener">${k.replace(/([A-Z])/g,' $1')}</a>`);
-      });
-
+      
       return `
         <div class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-4">
             <div>
-              <p class="text-sm text-gray-600 font-semibold">Building Name</p>
-              <p class="font-semibold">${app.buildingName || '—'}</p>
+              <p class="text-sm text-gray-600 font-semibold">Inspection ID</p>
+              <p class="text-lg font-bold text-red-600">${insp.inspectionId || insp._id || '—'}</p>
             </div>
             <div>
-              <p class="text-sm text-gray-600 font-semibold">Building Type</p>
-              <p class="font-semibold">${app.buildingType || '—'}</p>
-            </div>
-            <div class="md:col-span-2">
-              <p class="text-sm text-gray-600 font-semibold">Address</p>
-              <p class="font-semibold">${app.address || '—'}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-600 font-semibold">Floors</p>
-              <p class="font-semibold">${app.floors || app.numberOfFloors || '—'}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-600 font-semibold">Occupancy</p>
-              <p class="font-semibold">${app.occupancyLoad || '—'}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-600 font-semibold">Year</p>
-              <p class="font-semibold">${app.yearConstruction || '—'}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-600 font-semibold">Owner</p>
-              <p class="font-semibold">${app.ownerName || '—'}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-600 font-semibold">Contact</p>
-              <p class="font-semibold">${app.contactNumber || '—'}</p>
+              <p class="text-sm text-gray-600 font-semibold">Status</p>
+              <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white ${statusToClass(insp.status)}">
+                ${insp.status || 'Pending'}
+              </span>
             </div>
           </div>
 
           <div class="border-t pt-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-3">Fire Protection</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
-              <div><strong>Fire Extinguishers:</strong> ${bool(app.fireExtinguishers)}</div>
-              <div><strong>Hydrants:</strong> ${bool(app.hydrants)}</div>
-              <div><strong>Smoke Detectors:</strong> ${bool(app.smokeDetectors)}</div>
-              <div><strong>Sprinklers:</strong> ${bool(app.sprinklers)}</div>
-              <div><strong>Fire Alarm:</strong> ${bool(app.fireAlarm)}</div>
-              <div><strong>Emergency Exits:</strong> ${bool(app.emergencyExits)}</div>
-              <div><strong>Fire Pump:</strong> ${bool(app.firePump)}</div>
+            <h4 class="text-lg font-bold text-gray-800 mb-3">Building Details</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div><p class="text-sm text-gray-600">Building Name</p><p class="font-semibold">${insp.buildingName || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Building Type</p><p class="font-semibold">${insp.buildingType || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Owner Name</p><p class="font-semibold">${insp.ownerName || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Contact</p><p class="font-semibold">${insp.contactNumber || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Floors</p><p class="font-semibold">${insp.floors || insp.numberOfFloors || '—'}</p></div>
+              <div><p class="text-sm text-gray-600">Occupancy</p><p class="font-semibold">${insp.occupancyLoad || '—'}</p></div>
+              <div class="col-span-2"><p class="text-sm text-gray-600">Address</p><p class="font-semibold">${insp.address || '—'}</p></div>
             </div>
           </div>
 
           <div class="border-t pt-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-3">Electrical & Structural</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
-              <div><strong>Wiring Condition:</strong> ${app.wiringCondition || '—'}</div>
-              <div><strong>Earthing:</strong> ${bool(app.earthing)}</div>
-              <div><strong>Panels Accessible:</strong> ${bool(app.panelsAccessible)}</div>
-              <div><strong>Escape Routes Clear:</strong> ${bool(app.escapeRoutes)}</div>
-              <div><strong>Fire Doors:</strong> ${bool(app.fireDoors)}</div>
-              <div><strong>Staircase Width Adequate:</strong> ${bool(app.staircaseWidth)}</div>
+            <h4 class="text-lg font-bold text-gray-800 mb-3">Fire Safety Equipment</h4>
+            <div class="grid grid-cols-3 gap-2 text-sm">
+              <div><strong>Fire Extinguishers:</strong> ${bool(insp.fireExtinguishers)}</div>
+              <div><strong>Hydrants:</strong> ${bool(insp.hydrants)}</div>
+              <div><strong>Smoke Detectors:</strong> ${bool(insp.smokeDetectors)}</div>
+              <div><strong>Sprinklers:</strong> ${bool(insp.sprinklers)}</div>
+              <div><strong>Fire Alarm:</strong> ${bool(insp.fireAlarm)}</div>
+              <div><strong>Emergency Exits:</strong> ${bool(insp.emergencyExits)}</div>
             </div>
           </div>
 
-          <div class="border-t pt-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-3">Housekeeping & Storage</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
-              <div><strong>No Hazardous Storage:</strong> ${bool(app.hazardousStorage)}</div>
-              <div><strong>Corridors Clear:</strong> ${bool(app.corridors)}</div>
-              <div><strong>Waste Disposal Safe:</strong> ${bool(app.wasteDisposal)}</div>
-            </div>
-          </div>
-
-          <div class="border-t pt-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-2">Uploaded Documents</h4>
-            <div>${filesHtml.length ? filesHtml.join('') : '<div class="text-sm text-gray-600">No uploaded documents</div>'}</div>
-          </div>
+          ${insp.remarks ? `
+            <div class="border-t pt-4">
+              <h4 class="text-lg font-bold text-gray-800 mb-2">Remarks</h4>
+              <p class="text-gray-700">${insp.remarks}</p>
+            </div>` : ''}
 
           <div class="border-t pt-4 flex gap-3">
-            <button onclick="showInspectionUpdateModal('${app.reviewId || app._id}')"
-                    class="flex-1 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
+            <button onclick="showInspectionUpdateModal('${insp.inspectionId || insp._id}')" class="flex-1 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
               <i class="fas fa-edit mr-2"></i>Update Status
             </button>
-            <button onclick="closeInspectionModal()"
-                    class="flex-1 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700">
+            <button onclick="closeInspectionModal()" class="flex-1 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg hover:bg-gray-700">
               Close
             </button>
           </div>
@@ -981,30 +973,28 @@
       `;
     }
 
-    function closeInspectionModal() {
-      document.getElementById('inspectionModal').classList.add('hidden');
-    }
-
-    // Show update modal for inspection (inline form inside modal)
+    // Show inspection update modal
     function showInspectionUpdateModal(id) {
-      const decodedId = decodeURIComponent(id);
-      const item = allInspections.find(i => (i.reviewId === decodedId || i._id === decodedId));
-      if (!item) { alert('Inspection not found'); return; }
-      const modalHtml = `
-        <form onsubmit="updateInspectionStatus(event, '${encodeURIComponent(decodedId)}')" class="space-y-4">
+      const insp = allInspections.find(i => (i.inspectionId === id || i._id === id));
+      if (!insp) return;
+
+      document.getElementById('inspectionModalContent').innerHTML = `
+        <form id="inspectionUpdateForm" class="space-y-4">
           <div>
             <label class="block text-gray-700 font-semibold mb-2">Update Status</label>
             <select id="inspNewStatus" required class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none">
-              <option value="Submitted" ${item.status === 'Submitted' ? 'selected' : ''}>Submitted</option>
-              <option value="Under Review" ${item.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
-              <option value="Approved" ${item.status === 'Approved' ? 'selected' : ''}>Approved</option>
-              <option value="Rejected" ${item.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+              <option value="Pending" ${insp.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Under Review" ${insp.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+              <option value="Approved" ${insp.status === 'Approved' ? 'selected' : ''}>Approved</option>
+              <option value="Rejected" ${insp.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
             </select>
           </div>
+
           <div>
             <label class="block text-gray-700 font-semibold mb-2">Remarks (Optional)</label>
-            <textarea id="inspRemarks" rows="4" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter remarks">${item.remarks || ''}</textarea>
+            <textarea id="inspRemarks" rows="4" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none" placeholder="Enter any remarks or comments">${insp.remarks || ''}</textarea>
           </div>
+
           <div class="flex gap-3">
             <button type="submit" class="flex-1 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
               <i class="fas fa-save mr-2"></i>Save Changes
@@ -1015,59 +1005,60 @@
           </div>
         </form>
       `;
-      document.getElementById('inspectionModalContent').innerHTML = modalHtml;
+      
+      document.getElementById('inspectionUpdateForm').addEventListener('submit', (e) => updateInspectionStatus(e, id));
       document.getElementById('inspectionModal').classList.remove('hidden');
     }
 
-    // Consolidated inspection update (tries PUT then PATCH fallback)
+    // Update inspection status
     async function updateInspectionStatus(event, id) {
       event.preventDefault();
-      const status = document.getElementById('inspNewStatus') ? document.getElementById('inspNewStatus').value : null;
-      const remarks = document.getElementById('inspRemarks') ? document.getElementById('inspRemarks').value : '';
-
-      if (!status) { alert('Please select a status'); return; }
-
-      const payload = { status, remarks, reviewedBy: currentAdmin ? currentAdmin.username : 'admin' };
-      const decodedId = decodeURIComponent(id);
-      const url = `${INSP_API}/${encodeURIComponent(decodedId)}/status`;
+      
+      const newStatus = document.getElementById('inspNewStatus').value;
+      const remarks = document.getElementById('inspRemarks').value;
 
       try {
-        // Try PUT first (server might expect PUT), fallback to PATCH if PUT returns 404
-        const res = await fetchWithMethodFallback(url, 'PUT', 'PATCH', {
+        const res = await fetch(`${INSP_API}/inspections/${id}/status`, {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            status: newStatus,
+            remarks: remarks,
+            updatedBy: currentAdmin ? currentAdmin.username : 'admin'
+          })
         });
 
-        let result;
-        try { result = await res.json(); } catch (e) { result = null; }
+        const result = await res.json();
 
-        if (res.ok && result && result.success) {
+        if (res.ok && result.success) {
           alert('Inspection status updated successfully!');
           closeInspectionModal();
-          await loadAllInspections();
-          await loadRecentInspections();
           await loadDashboard();
         } else {
-          console.error('updateInspectionStatus failed', res.status, result);
-          alert('Error updating inspection: ' + (result?.message || res.status));
+          alert('Error updating status: ' + (result.message || 'Unknown error'));
         }
       } catch (err) {
-        console.error('Error updating inspection:', err);
-        alert('Error updating inspection. Check console / server logs.');
+        console.error('Error updating status:', err);
+        alert('Error updating status. Please make sure the backend is running.');
       }
     }
 
+    // Delete inspection
     async function deleteInspection(id) {
       if (!confirm('Are you sure you want to delete this inspection?')) return;
+
       try {
-        const decodedId = decodeURIComponent(id);
-        const res = await fetch(`${INSP_API}/${encodeURIComponent(decodedId)}`, { method: 'DELETE' });
+        const res = await fetch(`${INSP_API}/inspections/${id}`, {
+          method: 'DELETE'
+        });
+
         const result = await res.json();
+
         if (res.ok && result.success) {
-          alert('Inspection deleted');
-          await loadAllInspections();
+          alert('Inspection deleted successfully!');
+          await loadDashboard();
         } else {
-          alert('Error deleting inspection: ' + (result.message || res.status));
+          alert('Error deleting inspection: ' + (result.message || 'Unknown error'));
         }
       } catch (err) {
         console.error('Error deleting inspection:', err);
@@ -1075,7 +1066,15 @@
       }
     }
 
-    // ----------------- UI: section switching -----------------
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function closeInspectionModal() {
+      document.getElementById('inspectionModal').classList.add('hidden');
+    }
+
+    // Section switching
     function showSection(section) {
       document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -1089,11 +1088,8 @@
       } else if (section === 'inspections') {
         document.getElementById('inspectionsSection').classList.remove('hidden');
         document.querySelectorAll('.nav-item')[2].classList.add('active');
-        loadAllInspections();
       }
     }
-
-    // Initial fallback: nothing loaded until login
   </script>
 </body>
 </html>
