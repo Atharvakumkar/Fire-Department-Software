@@ -1,0 +1,17 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY backend/package*.json ./
+
+RUN npm install
+
+COPY backend/. .
+
+RUN addgroup -S app && adduser -S app -G app
+
+USER app
+
+EXPOSE 5000
+
+CMD ["node", "server.js"]
