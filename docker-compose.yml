@@ -1,0 +1,87 @@
+services:
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+
+    container_name: raksha-frontend
+
+    ports:
+      - "8080:80"
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "cat /usr/share/nginx/html/index.html || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    networks:
+      - raksha-network
+
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+
+    container_name: raksha-backend
+
+    ports:
+      - "5000:5000"
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    networks:
+      - raksha-network
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  inspection-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.inspection
+
+    container_name: raksha-inspection-backend
+
+    ports:
+      - "5001:5001"
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "ps"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    networks:
+      - raksha-network
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+networks:
+  raksha-network:
+    driver: bridge
