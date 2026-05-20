@@ -8,10 +8,18 @@ RUN npm install
 
 COPY inspectionBackend/. .
 
+RUN apk add --no-cache curl
+
+COPY docker/scripts/startup.sh /startup.sh
+
+RUN chmod +x /startup.sh
+
 RUN addgroup -S app && adduser -S app -G app
 
 USER app
 
 EXPOSE 5001
+
+ENTRYPOINT ["/startup.sh"]
 
 CMD ["node", "server.js"]
