@@ -1,197 +1,261 @@
 # Raksha Bandhu
 
-A fire safety and emergency response platform developed for Avishkar: Maharashtra State Inter-University Research Convention. The system digitizes interactions between citizens and fire department authorities, covering NOC applications, inspection scheduling, fire safety education, and a real-time SOS emergency alert system.
+## Fire Safety & Emergency Response Infrastructure Platform
 
-## Table of Contents
+Raksha Bandhu is a containerized fire safety and emergency response platform developed for **Avishkar: Maharashtra State Inter-University Research Convention**. The platform digitizes communication between citizens and fire department authorities through NOC management, inspection scheduling, emergency alerting, and fire safety awareness systems.
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [SOS System](#sos-system)
-- [API Overview](#api-overview)
-- [Contributing](#contributing)
+The project was later transformed into a **multi-container Dockerized infrastructure architecture** featuring isolated backend services, container orchestration, health monitoring, startup initialization systems, and optimized lightweight deployment using Docker Compose.
 
 ---
 
-## Features
+# Infrastructure Overview
 
-- Online Fire NOC application submission and status tracking
-- Fire safety inspection request and scheduling
+```text
+                    ┌──────────────────────┐
+                    │      Browser         │
+                    │   Client Requests    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   Frontend Service   │
+                    │      NGINX           │
+                    │  Port: 8080 -> 80    │
+                    └──────────┬───────────┘
+                               │
+        ┌──────────────────────┼──────────────────────┐
+        │                                             │
+        ▼                                             ▼
+
+┌──────────────────────┐               ┌──────────────────────┐
+│   NOC Backend API    │               │ Inspection Backend   │
+│      Node.js         │               │      Node.js         │
+│      Express.js      │               │      Express.js      │
+│    Port: 5000        │               │    Port: 5001        │
+└──────────────────────┘               └──────────────────────┘
+
+                Docker Network: raksha-network
+```
+
+---
+
+# Infrastructure Features
+
+- Multi-container Docker architecture
+- Docker Compose orchestration
+- Custom isolated bridge network
+- Container health monitoring system
+- Resource-constrained containers
+- Entrypoint startup initialization scripts
+- Alpine Linux optimized lightweight containers
+- Non-root secure container execution
+- Live container observability using Docker Stats
+- Production-style backend service separation
+
+---
+
+# Application Features
+
+- Online Fire NOC application submission and tracking
+- Fire safety inspection request management
 - Emergency contacts directory
-- Fire safety awareness and guidelines
-- SOS emergency button that captures GPS coordinates and dispatches an alert via WhatsApp
-- Admin panel for fire department staff to manage incoming requests
+- Fire safety awareness and educational resources
+- Real-time SOS emergency alert system
+- WhatsApp-based emergency dispatch alerts
+- Admin panel for fire department authorities
+- GPS-enabled emergency incident tracking
 
 ---
 
-## Project Structure
+# Tech Stack
 
-```
-Fire-Department-Software/
-|
-|-- homePage.html           # Main dashboard; entry point of the application
-|-- nocPage.html            # NOC application form and tracking interface
-|-- inspectionPage.html     # Inspection request and management interface
-|-- contactsPage.html       # Emergency contacts directory
-|-- safety_tips.html        # Fire safety guidelines and awareness content
-|-- adminPage.html          # Admin dashboard for fire department staff
-|
-|-- backend/                # Express server handling NOC-related API requests
-|-- inspectionBackend/      # Express server handling inspection-related API requests
-```
+## Frontend
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Tailwind CSS
+- Font Awesome
+- NGINX
 
 ---
 
-## Tech Stack
-
-**Frontend**
-
-- HTML5, CSS3, Vanilla JavaScript
-- Tailwind CSS (loaded via CDN)
-- Font Awesome 6 (loaded via CDN)
-
-**Backend**
+## Backend
 
 - Node.js
 - Express.js
-- Two separate server instances: one for NOC operations, one for inspection operations
-
-**Browser APIs**
-
-- Geolocation API — retrieves real-time device coordinates during an SOS event
-- localStorage — stores incident logs on the client side (last 50 entries)
-
-**External Services**
-
-- WhatsApp API (wa.me) — delivers formatted SOS alert messages to a configured number
+- REST APIs
 
 ---
 
-## Prerequisites
+## DevOps & Infrastructure
 
-- Node.js v16 or above
-- npm
-- A modern browser with Geolocation support
+- Docker
+- Docker Compose
+- Alpine Linux
+- Container Networking
+- Healthchecks
+- Linux Shell Scripting
+- NGINX Reverse Proxy Concepts
 
 ---
 
-## Installation
+## Browser APIs
 
-Clone the repository:
+- Geolocation API
+- localStorage API
+
+---
+
+## External Services
+
+- WhatsApp API (wa.me)
+
+---
+
+# Project Structure
+
+```text
+Fire-Department-Software/
+│
+├── backend/                     # NOC backend service
+├── inspectionBackend/           # Inspection backend service
+│
+├── docker/
+│   ├── nginx/
+│   │   └── frontend.conf
+│   │
+│   └── scripts/
+│       └── startup.sh
+│
+├── Dockerfile.backend
+├── Dockerfile.inspection
+├── Dockerfile.frontend
+│
+├── docker-compose.yml
+├── .dockerignore
+│
+├── index.html
+├── adminPage.html
+├── contactsPage.html
+├── inspectionPage.html
+├── nocPage.html
+├── safety_tips.html
+│
+└── README.md
+```
+
+---
+
+# Containerized Deployment
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/Atharvakumkar/Fire-Department-Software.git
+
 cd Fire-Department-Software
 ```
 
-Install dependencies and start the NOC backend:
+---
+
+# Run Entire Infrastructure
 
 ```bash
-cd backend
-npm install
-node index.js
+docker compose up --build
 ```
 
-In a separate terminal, install dependencies and start the inspection backend:
+---
+
+# Access Services
+
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:8080 |
+| NOC Backend | http://localhost:5000 |
+| Inspection Backend | http://localhost:5001 |
+
+---
+
+# Docker Infrastructure Commands
+
+## View Running Containers
 
 ```bash
-cd inspectionBackend
-npm install
-node index.js
+docker ps
 ```
 
-Open `homePage.html` in a browser directly, or serve it using a local static server:
+---
+
+## View Container Resource Usage
 
 ```bash
-npx serve .
+docker stats
 ```
 
 ---
 
-## Configuration
+## Inspect Docker Network
 
-### SOS WhatsApp Number
-
-The SOS system sends alerts to a hardcoded WhatsApp number. Update the following constant in `homePage.html` before deployment:
-
-```javascript
-const WHATSAPP_NUMBER = '91XXXXXXXXXX'; // Replace with country code + number
+```bash
+docker network inspect fire-department-software_raksha-network
 ```
 
-### Backend Endpoints
+---
 
-By default, each backend runs on its own port. Update the fetch URLs in the respective HTML files if you change the default ports in `backend/index.js` or `inspectionBackend/index.js`.
+## Stop Infrastructure
+
+```bash
+docker compose down
+```
 
 ---
 
-## Usage
+# Health Monitoring
 
-Navigate to `homePage.html` to access the main dashboard. The sidebar provides links to all modules:
+The platform includes Docker health monitoring for:
 
-- **Dashboard** — Overview with the SOS button and quick-access cards
-- **Inspections** — Submit and track inspection requests
-- **NOCs** — Apply for a Fire NOC and monitor application status
-- **Tips** — Browse fire safety guidelines
-- **Emergency** — Access the emergency contacts directory
-
----
-
-## SOS System
-
-The SOS flow is as follows:
-
-1. The user presses the SOS button on the dashboard.
-2. A 3-second countdown overlay is shown. The user can cancel within this window.
-3. After the countdown, the browser requests the device's GPS coordinates via the Geolocation API.
-4. A WhatsApp message is constructed containing:
-   - A unique incident ID (format: `AG-<base36 timestamp>-<random base36>`)
-   - ISO timestamp of the alert
-   - Google Maps link with the exact latitude and longitude
-5. The browser opens WhatsApp with the pre-filled message targeting the configured number.
-6. A confirmation card is displayed in the UI.
-7. The incident payload (ID, timestamp, coordinates, accuracy) is stored in localStorage under the key `incidentLogs`.
-
-If geolocation is denied or unavailable, the alert is still sent with a note indicating that location data could not be obtained.
+- Frontend container validation
+- Backend API health validation
+- Container runtime verification
+- Infrastructure observability
 
 ---
 
-## API Overview
+# Resource Optimization
 
-The project uses two backend services. Specific route documentation should be found within each backend folder.
+All containers use:
 
-**backend/** — Handles NOC application data: form submissions, document references, and status updates.
+- Alpine Linux base images
+- Lightweight Node.js runtimes
+- Resource-constrained deployment
+- Minimal memory footprint (~10–12 MB per service)
 
-**inspectionBackend/** — Handles inspection requests: creation, scheduling, and status management.
+---
 
-Both services follow a REST architecture and are consumed by the frontend via `fetch()` calls in the respective HTML pages.
+# SOS Emergency Workflow
+
+1. User presses the SOS button
+2. System starts emergency countdown
+3. Browser retrieves GPS coordinates
+4. Incident payload is generated
+5. WhatsApp emergency alert is dispatched
+6. Google Maps location is attached
+7. Incident logs are stored locally
 
 ---
 
-## Contributing
+# Authors
 
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m "describe your change"`
-4. Push to your fork: `git push origin feature/your-feature`
-5. Open a pull request against the `main` branch.
-
-Please keep pull requests focused on a single change and include a clear description of what was changed and why.
-
----
- 
-## Authors
- 
 - Atharva Kumkar
 - Abha Naktode
 - Riya Wagh
 - Riddhi Totala
+
 ---
- 
-## License
- 
-This project was developed as part of Avishkar: Maharashtra State Inter-University Research Convention. All rights reserved by the authors. Unauthorized reproduction, distribution, or commercial use of this software without prior written permission from the authors is prohibited.
- 
+
+# License
+
+This project was developed as part of Avishkar: Maharashtra State Inter-University Research Convention.
+
+All rights reserved by the authors.
