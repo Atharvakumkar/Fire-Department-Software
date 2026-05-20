@@ -100,13 +100,6 @@ The project was later transformed into a **multi-container Dockerized infrastruc
 
 ---
 
-## Browser APIs
-
-- Geolocation API
-- localStorage API
-
----
-
 ## External Services
 
 - WhatsApp API (wa.me)
