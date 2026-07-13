@@ -23,14 +23,6 @@ Before writing, a few real issues in the codebase need to be resolved or explici
   - **Option A (Infrastructure paper):** Focus on the Docker/containerization architecture as the core contribution.
   - **Option B (Full-system paper):** Present it as an end-to-end e-governance/fire-safety platform (requires more code fixes to avoid overclaiming).
   - **Recommended:** Option A, with application features described as use cases the infrastructure supports.
-- Check Avishkar's exact submission requirements: format (IEEE/ACM/other), page limit, track/category.
-
-**Outcome:**
-- A one-paragraph scope statement.
-- Confirmed formatting template and page limit.
-
-**Resources:**
-- Avishkar convention's official call-for-papers / author guidelines page (search for the current year's circular).
 
 ---
 
@@ -152,21 +144,6 @@ Before writing, a few real issues in the codebase need to be resolved or explici
 
 ---
 
-## Phase 8 — Submission Prep
-
-**What needs to be done:**
-- Match Avishkar's exact formatting requirements (fonts, margins, author/affiliation block).
-- Run a plagiarism/similarity check if required by the convention.
-- Confirm page limit compliance and file format (PDF/Word) required for submission.
-- Submit before the deadline with all required supplementary materials (e.g., source code link, demo video if applicable).
-
-**Outcome:**
-- Final submitted paper.
-
-**Resources:**
-- Avishkar's submission portal / instructions (from Phase 1).
-
----
 
 ## Summary Table
 
@@ -179,4 +156,3 @@ Before writing, a few real issues in the codebase need to be resolved or explici
 | 5 | Evaluation / Results | Resource usage, latency, startup time, durability, SOS workflow trace | Results section with table/chart | Docker resource constraints docs; autocannon/ab |
 | 6 | Writing the Paper | Draft all sections in order; document limitations honestly | Complete first draft | Avishkar template; Purdue OWL |
 | 7 | Figures & Polish | Finalize diagrams/screenshots, proofread, format citations | Submission-ready draft | Zotero/Mendeley |
-| 8 | Submission Prep | Match formatting, plagiarism check, submit | Final submitted paper | Avishkar submission portal |
